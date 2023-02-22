@@ -3,6 +3,8 @@ import logging.handlers
 import os
 
 import requests
+from chessdotcom import get_player_profile, get_player_stats, get_player_game_archives
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -27,12 +29,16 @@ except KeyError:
 
     
 def main():
+    """
     r = requests.get('https://weather.talkpython.fm/api/weather?city=Uppsala&country=SE')
     if r.status_code == 200:
         data = r.json()
         temperature = data["forecast"]["temp"]
         logger.info(f'Weather in Uppsala: {temperature}')
-
+    """
+    response = get_player_profile("tianminlyu")
+    player_name = response.json['player']['name']
+    logger.info(f'Player name is : {player_name}')
 
 
 if __name__ == "__main__":
