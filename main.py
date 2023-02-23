@@ -25,20 +25,27 @@ except KeyError:
     #logger.info("Token not available!")
     #raise
 
-
-
+def get_user_archives(username, months):
+    """
+    get archive monthly files of specific chess.com player
+    input:
+    username - username of the chess.com player
+    months - target months that we want to get the archives
     
+    output:
+    target_month - files of archives according to months parameter
+    """
+    archives = get_player_game_archives(username).json['archives']
+    target_month = []
+    for archive in archives:
+        if archive[-7:] in months:
+            target_month.append(archive)
+    return target_month
+
 def main():
-    """
-    r = requests.get('https://weather.talkpython.fm/api/weather?city=Uppsala&country=SE')
-    if r.status_code == 200:
-        data = r.json()
-        temperature = data["forecast"]["temp"]
-        logger.info(f'Weather in Uppsala: {temperature}')
-    """
-    response = get_player_profile("tianminlyu")
-    player_name = response.json['player']['name']
-    logger.info(f'Player name is : {player_name}')
+    files = get_user_archives("tianminlyu",["2023/02"])
+    file = files[-1]
+    logger.info(f'The most recent month archive of tianminlyu is : {file}')
 
 
 if __name__ == "__main__":
