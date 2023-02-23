@@ -3,10 +3,10 @@ import logging.handlers
 import os
 import io
 import pandas as pd
-
 import requests
 from chessdotcom import get_player_profile, get_player_stats, get_player_game_archives
-
+import chess.pgn
+from converter.pgn_data import PGNData
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -109,10 +109,10 @@ def main():
     file = files[-1]
     logger.info(f'The url of the Feb archive of tianminlyu is : {file}')
     result = game_result('tianminlyu',file)
-    #max_time = result['StartTime'].max()
-    #logger.info(f'The max start time is : {max_time}')
+    max_time = result['StartTime'].max()
+    logger.info(f'The max start time is : {max_time}')
 
-    #result.to_csv("game_result.csv")
+    result.to_csv("game_result.csv")
     
 
 if __name__ == "__main__":
