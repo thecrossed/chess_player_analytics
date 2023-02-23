@@ -3,7 +3,5 @@ chess.com
 pprintpp
 pandas
 parsita
-json
 pgn2data
-ftplib
 logging
