@@ -26,6 +26,41 @@ except KeyError:
     SOME_SECRET = "Token not available!"
     #logger.info("Token not available!")
     #raise
+    
+# students from Tianmin's classes - BO, BP, AN
+tianmin_players = {
+    "Teacher" : ['tianminlyu'],
+    "BO" : ['AGcuber19',
+            'TLPAWN',
+            'xiaoanwu',
+            'EmmaXLi',
+            'akfunchess66',
+            'Marsboom', 
+            'Claraqiu',
+            'Ravenclawfairy', 
+            'Zora_zhu',
+            'BurleyWalrus'],
+    "BP" : ['taionemm',
+            'augustinewz',
+            'oscarzhang818',
+            'yaohengli',
+            'Wallacewang1214',
+            'SophiaZ2022',
+            'AliceCLi',
+            'yumitang',
+            'james2945',
+            'Oinkoinkw'],
+    "AN" : ['Cathye1',
+            'lunathekitsune',
+            'ArthurRocket',
+            'vivianwwww20',
+            'ChloeWang16',
+            'Tyzalex',
+            'ZhichengW',
+            'Haochen1123',
+            'jaydenlan0118',
+            'ImRacoonie']
+}
 
 def get_user_archives(username, months):
     """
@@ -104,12 +139,24 @@ def game_result(username,file):
                         ])
     return df
 
+def class_games():
+    result_df = []
+    for classes in tianmin_players.keys():
+        for player in tianmin_players[classes]:
+            try:
+                files = get_user_archives(player,["2023/02"])
+                file = files[-1]
+                result = game_result(player,file)
+                result_df.append(result)
+            except:
+                pass
+    df = pd.concat(df_players)
+    return df
+        
+
 def main():
-    files = get_user_archives("tianminlyu",["2023/02"])
-    file = files[-1]
-    logger.info(f'The url of the Feb archive of tianminlyu is : {file}')
-    result = game_result('tianminlyu',file)
-    result.to_csv("game_result.csv")
+    df = class_games()
+    df.to_csv("game_result.csv")
     
 
 if __name__ == "__main__":
