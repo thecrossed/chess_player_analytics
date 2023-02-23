@@ -54,13 +54,59 @@ def get_archive_games(filename):
     games = requests.get(filename).json()['games']
     return games
 
+def game_result(username,file):
+    """
+    get username, game_starttime, game_endtime, white_username, black_username, Result from game data
+    input -
+    username: of the player
+    file: the file stored games data
+    
+    output -
+    a dataframe that contains username, game_starttime, game_endtime, white_username, black_username, Result
+    """
+    usernames = []
+    start_time = []
+    end_time = []
+    white_username = [] 
+    black_username = []
+    result = []
+    
+    games = get_archive_games(file)
+    
+    for game in games:
+        try:
+            usernames.append(username)
+            end_time.append(game.get('end_time',None))
+            white_username.append(game.get('white',None)['username'])
+            black_username.append(game.get('black',None)['username'])
+            pgn_written = io.StringIO(game['pgn'])
+            game_data = chess.pgn.read_game(pgn_written)
+            result.append(game_data.headers['Result'])
+            start_time.append(game_data.headers['StartTime'])
+        except Exception as e:
+            print(e)
+        df = pd.DataFrame(list(zip(usernames,                               
+                          end_time,
+                           white_username,
+                           black_username,
+                          result,
+                          start_time
+                              )),
+               columns =['username',
+                        'end_time',
+                        'white_username',
+                        'black_username',
+                           'Result',
+                          'StartTime'
+                        ])
+    return df
+
 def main():
     files = get_user_archives("tianminlyu",["2023/02"])
-    file = files[-1]
     logger.info(f'The url of the Feb archive of tianminlyu is : {file}')
-    games = get_archive_games(file)
-    nr_games = len(games)
-    logger.info(f'In Feb, tianminlyu has played {nr_games} chess games.')
+    result = game_result('tianminlyu',files[-1])
+    result.to_csv("game_result.csv")
+    
 
 if __name__ == "__main__":
     main()
