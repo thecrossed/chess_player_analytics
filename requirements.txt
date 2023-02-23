@@ -4,4 +4,3 @@ pprintpp
 pandas
 parsita
 pgn2data
-logging
