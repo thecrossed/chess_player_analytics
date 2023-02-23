@@ -1,6 +1,8 @@
 import logging
 import logging.handlers
 import os
+import io
+import pandas as pd
 
 import requests
 from chessdotcom import get_player_profile, get_player_stats, get_player_game_archives
