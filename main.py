@@ -79,13 +79,13 @@ def game_result(username,file):
         try:
             usernames.append(username)
             logger.info(f'Username is : {username}')
-            end_time.append(game.get('end_time',None))
             white_username.append(game.get('white',None)['username'])
             black_username.append(game.get('black',None)['username'])
             pgn_written = io.StringIO(game['pgn'])
             game_data = chess.pgn.read_game(pgn_written)
             result.append(game_data.headers['Result'])
             start_time.append(game_data.headers['StartTime'])
+            end_time.append(game_data.headers['EndTime'])
         except Exception as e:
             print(e)
     df = pd.DataFrame(list(zip(usernames,                               
