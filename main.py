@@ -42,11 +42,25 @@ def get_user_archives(username, months):
             target_month.append(archive)
     return target_month
 
+def get_archive_games(filename):
+    """
+    return games in one archive file
+    
+    input:
+    filename - filename that contains game urls
+    
+    output: 
+    """
+    games = requests.get(filename).json()['games']
+    return games
+
 def main():
     files = get_user_archives("tianminlyu",["2023/02"])
     file = files[-1]
-    logger.info(f'The most recent month archive of tianminlyu is : {file}')
-
+    logger.info(f'The url of the Feb archive of tianminlyu is : {file}')
+    games = get_archive_games(file)
+    nr_games = len(games)
+    logger.info(f'In Feb, tianminlyu has played {nr_games} chess games.')
 
 if __name__ == "__main__":
     main()
