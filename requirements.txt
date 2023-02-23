@@ -1,2 +1,9 @@
 requests==2.28.1
 chess.com
+pprint
+pandas
+parsita
+json
+pgn2data
+ftplib
+logging
