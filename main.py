@@ -103,6 +103,7 @@ def game_result(username,file):
 
 def main():
     files = get_user_archives("tianminlyu",["2023/02"])
+    file = files[-1]
     logger.info(f'The url of the Feb archive of tianminlyu is : {file}')
     result = game_result('tianminlyu',files[-1])
     result.to_csv("game_result.csv")
