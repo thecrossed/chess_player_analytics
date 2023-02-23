@@ -87,7 +87,7 @@ def game_result(username,file):
             start_time.append(game_data.headers['StartTime'])
         except Exception as e:
             print(e)
-        df = pd.DataFrame(list(zip(usernames,                               
+    df = pd.DataFrame(list(zip(usernames,                               
                           end_time,
                            white_username,
                            black_username,
@@ -107,8 +107,9 @@ def main():
     files = get_user_archives("tianminlyu",["2023/02"])
     file = files[-1]
     logger.info(f'The url of the Feb archive of tianminlyu is : {file}')
-    result = game_result('tianminlyu',files[-1])
+    result = game_result('tianminlyu',file)
     result.to_csv("game_result.csv")
+    logger.info(f'The url is : {result['username'].iloc[0]}')
     
 
 if __name__ == "__main__":
