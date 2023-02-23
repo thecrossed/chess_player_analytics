@@ -109,9 +109,6 @@ def main():
     file = files[-1]
     logger.info(f'The url of the Feb archive of tianminlyu is : {file}')
     result = game_result('tianminlyu',file)
-    max_time = result['StartTime'].max()
-    logger.info(f'The max start time is : {max_time}')
-
     result.to_csv("game_result.csv")
     
 
