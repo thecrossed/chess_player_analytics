@@ -109,7 +109,6 @@ def main():
     logger.info(f'The url of the Feb archive of tianminlyu is : {file}')
     result = game_result('tianminlyu',file)
     result.to_csv("game_result.csv")
-    logger.info(f'The url is : {result['username'].iloc[0]}')
     
 
 if __name__ == "__main__":
