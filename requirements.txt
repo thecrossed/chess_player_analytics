@@ -1,6 +1,6 @@
 requests==2.28.1
 chess.com
-pprint
+pprintpp
 pandas
 parsita
 json
