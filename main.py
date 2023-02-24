@@ -7,6 +7,8 @@ import requests
 from chessdotcom import get_player_profile, get_player_stats, get_player_game_archives
 import chess.pgn
 from converter.pgn_data import PGNData
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -61,6 +63,24 @@ tianmin_players = {
             'jaydenlan0118',
             'ImRacoonie']
 }
+
+def last_n_month(n):
+    """
+    return the month as yyyy/mm format of the past n months from now
+    input -
+    n: number of months from past
+    
+    output -
+    a list of month with yyyy/mm format
+    """
+    months_lst = []
+    for num in range(n):
+        months = date.today() + relativedelta(months=-num)
+        if months.month <= 9:
+            months_lst.append(str(months.year) + "/"+ "0" + str(months.month))
+        else:
+            months_lst.append(str(months.year) + "/"+ str(months.month))
+    return months_lst
 
 def get_user_archives(username, months):
     """
