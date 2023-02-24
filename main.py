@@ -113,7 +113,6 @@ def game_result(username,file):
     for game in games:
         try:
             usernames.append(username)
-            logger.info(f'Username is : {username}')
             white_username.append(game.get('white',None)['username'])
             black_username.append(game.get('black',None)['username'])
             pgn_written = io.StringIO(game['pgn'])
@@ -144,13 +143,14 @@ def class_games():
     for classes in tianmin_players.keys():
         for player in tianmin_players[classes]:
             try:
+                logger.info(f'The game of this : {username} is being proccessed...')
                 files = get_user_archives(player,["2023/02"])
                 file = files[-1]
                 result = game_result(player,file)
                 result_df.append(result)
             except:
                 pass
-    df = pd.concat(df_players)
+    df = pd.concat(result_df)
     return df
         
 
