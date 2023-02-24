@@ -143,7 +143,7 @@ def class_games():
     for classes in tianmin_players.keys():
         for player in tianmin_players[classes]:
             try:
-                logger.info(f'The game of this : {username} is being proccessed...')
+                logger.info(f'The game of this : {player} is being proccessed...')
                 files = get_user_archives(player,["2023/02"])
                 file = files[-1]
                 result = game_result(player,file)
