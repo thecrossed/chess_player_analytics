@@ -158,16 +158,17 @@ def game_result(username,file):
                         ])
     return df
 
-def class_games():
+def class_games(n):
     result_df = []
     for classes in tianmin_players.keys():
         for player in tianmin_players[classes]:
             try:
                 logger.info(f'The game of this : {player} is being proccessed...')
-                files = get_user_archives(player,["2023/02"])
-                file = files[-1]
-                result = game_result(player,file)
-                result_df.append(result)
+                months = last_n_month(n)
+                files = get_user_archives(player,months)
+                for file in files: 
+                    result = game_result(player,file)
+                    result_df.append(result)
             except:
                 pass
     df = pd.concat(result_df)
@@ -175,7 +176,7 @@ def class_games():
         
 
 def main():
-    df = class_games()
+    df = class_games(3)
     df.to_csv("game_result.csv")
     
 
