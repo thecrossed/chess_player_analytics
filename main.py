@@ -122,6 +122,7 @@ def game_result(username,file):
     a dataframe that contains username, game_starttime, game_endtime, white_username, black_username, Result
     """
     usernames = []
+    uuid = []
     start_time = []
     end_time = []
     white_username = [] 
@@ -133,6 +134,7 @@ def game_result(username,file):
     for game in games:
         try:
             usernames.append(username)
+            uuid.append(game.get('url',None))
             white_username.append(game.get('white',None)['username'])
             black_username.append(game.get('black',None)['username'])
             pgn_written = io.StringIO(game['pgn'])
@@ -142,7 +144,8 @@ def game_result(username,file):
             end_time.append(game_data.headers['EndTime'])
         except Exception as e:
             print(e)
-    df = pd.DataFrame(list(zip(usernames,                               
+    df = pd.DataFrame(list(zip(usernames,  
+                           uuid,
                           end_time,
                            white_username,
                            black_username,
@@ -150,6 +153,7 @@ def game_result(username,file):
                           start_time
                               )),
                columns =['username',
+                         'uuid',
                         'end_time',
                         'white_username',
                         'black_username',
@@ -159,6 +163,12 @@ def game_result(username,file):
     return df
 
 def class_games(n):
+    """
+    input:
+    n- number of past months thee data set has retrieved
+    output
+    return a dataframe that contains what game_result function returns for each player in the classes
+    """
     result_df = []
     for classes in tianmin_players.keys():
         for player in tianmin_players[classes]:
@@ -168,6 +178,7 @@ def class_games(n):
                 files = get_user_archives(player,months)
                 for file in files: 
                     result = game_result(player,file)
+                    result_df['class'] = classes
                     result_df.append(result)
             except:
                 pass
