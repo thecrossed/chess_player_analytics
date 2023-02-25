@@ -123,6 +123,9 @@ def game_result(username,file):
     """
     usernames = []
     uuid = []
+    url = []
+    initial_setup = []
+    time_class = []
     start_time = []
     end_time = []
     white_username = [] 
@@ -135,7 +138,10 @@ def game_result(username,file):
     for game in games:
         try:
             usernames.append(username)
-            uuid.append(game.get('url',None))
+            uuid.append(game.get('uuid',None))
+            url.append(game.get('url',None)) # game.get('url', None)
+            initial_setup.append(game.get('initial_setup',None))
+            time_class.append(game.get('time_class',None))
             white_username.append(game.get('white',None)['username'])
             black_username.append(game.get('black',None)['username'])
             pgn_written = io.StringIO(game['pgn'])
@@ -148,20 +154,26 @@ def game_result(username,file):
             print(e)
     df = pd.DataFrame(list(zip(usernames,  
                            uuid,
-                          end_time,
+                           url,
+                           initial_setup,
+                           time_class,
+                           end_time,
                            white_username,
                            black_username,
-                          result,
-                          start_time,
-                          UTCTime
+                           result,
+                           start_time,
+                           UTCTime
                               )),
                columns =['username',
                          'uuid',
-                        'end_time',
-                        'white_username',
-                        'black_username',
-                           'Result',
-                          'StartTime',
+                         'url',
+                         'initial_setup',
+                         'time_class',
+                         'end_time',
+                         'white_username',
+                         'black_username',
+                         'Result',
+                         'StartTime',
                          'UTCTime'
                         ])
     return df
