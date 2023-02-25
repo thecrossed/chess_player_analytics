@@ -128,6 +128,7 @@ def game_result(username,file):
     white_username = [] 
     black_username = []
     result = []
+    UTCTime = []
     
     games = get_archive_games(file)
     
@@ -142,6 +143,7 @@ def game_result(username,file):
             result.append(game_data.headers['Result'])
             start_time.append(game_data.headers['StartTime'])
             end_time.append(game_data.headers['EndTime'])
+            UTCTime.append(game_data.headers['UTCTime'])
         except Exception as e:
             print(e)
     df = pd.DataFrame(list(zip(usernames,  
@@ -150,7 +152,8 @@ def game_result(username,file):
                            white_username,
                            black_username,
                           result,
-                          start_time
+                          start_time,
+                          UTCTime
                               )),
                columns =['username',
                          'uuid',
@@ -158,7 +161,8 @@ def game_result(username,file):
                         'white_username',
                         'black_username',
                            'Result',
-                          'StartTime'
+                          'StartTime',
+                         'UTCTime'
                         ])
     return df
 
