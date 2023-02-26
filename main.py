@@ -194,7 +194,6 @@ def class_games(n):
                 files = get_user_archives(player,months)
                 for file in files: 
                     result = game_result(player,file)
-                    result_df['class'] = classes
                     result_df.append(result)
             except:
                 pass
