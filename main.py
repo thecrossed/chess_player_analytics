@@ -222,11 +222,34 @@ def class_games(n):
     return df
         
 
-def main():
-    df = class_games(3)
-    df.to_csv("game_result.csv")
+def game_class():
+    """
+    output - a dataframe that have column white_user_class indicate the class of the white username and black_user_class for black
+    """
+    games = class_games(3)
     student_data = student_df(tianmin_players)
-    student_data.to_csv("student_data.csv")
+    
+    games_white = games.merge(students.rename({'username': 'white_username_class'}, axis=1),
+               left_on='white_username', right_on='white_username_class', how='left')
+
+    games_white_black = games_white.merge(students.rename({'username': 'black_username_class'}, axis=1),
+               left_on='black_username', right_on='black_username_class', how='left')
+
+    df = games_white_black[['username', 'uuid', 'url', 'initial_setup', 'time_class',
+       'time_control', 'end_time', 'white_username', 'black_username',
+       'Result', 'StartTime', 'UTCDate', 'class_x','class_y']]
+
+    df = df.rename(columns={"class_x": "white_user_class", "class_y": "black_user_class"})
+    
+    return df
+
+def main():
+    # df = class_games(3)
+    # df.to_csv("game_result.csv")
+    #student_data = student_df(tianmin_players)
+    # student_data.to_csv("student_data.csv")
+    df = game_class()
+    df.to_csv("game_class.csv")
 
 if __name__ == "__main__":
     main()
