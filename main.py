@@ -64,6 +64,21 @@ tianmin_players = {
             'ImRacoonie']
 }
 
+def student_df(student_data):
+    """
+    input:
+    student_data - dictionary, where key is the class and value is a list of username of each student
+    
+    output:
+    a dataframe having two columns - class, student class; username, student username
+    """
+    df = pd.DataFrame({'Keys': list(student_data.keys()), 'Values': list(student_data.values())})
+    df = df.explode(column='Values').reset_index(drop=True)
+    df.rename(columns = {'Keys':'class', 'Values':'username'}, inplace = True)
+
+
+    return df
+
 def last_n_month(n):
     """
     return the month as yyyy/mm format of the past n months from now
