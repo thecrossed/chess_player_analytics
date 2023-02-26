@@ -141,6 +141,7 @@ def game_result(username,file):
     url = []
     initial_setup = []
     time_class = []
+    time_control = []
     start_time = []
     end_time = []
     white_username = [] 
@@ -157,6 +158,7 @@ def game_result(username,file):
             url.append(game.get('url',None)) # game.get('url', None)
             initial_setup.append(game.get('initial_setup',None))
             time_class.append(game.get('time_class',None))
+            time_control.append(game.get('time_control',None))
             white_username.append(game.get('white',None)['username'])
             black_username.append(game.get('black',None)['username'])
             pgn_written = io.StringIO(game['pgn'])
@@ -172,6 +174,7 @@ def game_result(username,file):
                            url,
                            initial_setup,
                            time_class,
+                           time_control,
                            end_time,
                            white_username,
                            black_username,
@@ -184,6 +187,7 @@ def game_result(username,file):
                          'url',
                          'initial_setup',
                          'time_class',
+                         'time_control',
                          'end_time',
                          'white_username',
                          'black_username',
