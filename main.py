@@ -222,8 +222,10 @@ def class_games(n):
 
 def main():
     df = class_games(3)
+    df.pop("Unnamed: 0")
     df.to_csv("game_result.csv")
     student_data = student_df(tianmin_players)
+    student_data.pop("Unnamed: 0")
     student_data.to_csv("student_data.csv")
 
 if __name__ == "__main__":
