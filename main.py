@@ -216,6 +216,19 @@ def class_games(n):
                 pass
     df = pd.concat(result_df)
     return df
+
+def same_class(df):
+    """
+    ensure that the players are from the same class
+    
+    input:
+    df - the targeted dataframe
+    
+    output:
+    a new dataframe where rows containing only white user class equals to black user class
+    """
+    new_df = df.loc[df['white_user_class'] == df['black_user_class']]
+    return new_df
         
 
 def game_class():
@@ -245,7 +258,8 @@ def main():
     #student_data = student_df(tianmin_players)
     # student_data.to_csv("student_data.csv")
     df = game_class()
-    df.to_csv("game_class.csv")
+    new_df = same_class(df)
+    new_df.to_csv("game_class.csv")
 
 if __name__ == "__main__":
     main()
