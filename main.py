@@ -75,9 +75,6 @@ def student_df(student_data):
     df = pd.DataFrame({'Keys': list(student_data.keys()), 'Values': list(student_data.values())})
     df = df.explode(column='Values').reset_index(drop=True)
     df.rename(columns = {'Keys':'class', 'Values':'username'}, inplace = True)
-
-    df.pop("Unnamed: 0")
-
     return df
 
 def last_n_month(n):
