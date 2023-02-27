@@ -223,7 +223,7 @@ def game_class():
     output - a dataframe that have column white_user_class indicate the class of the white username and black_user_class for black
     """
     games = class_games(3)
-    student_data = student_df(tianmin_players)
+    students = student_df(tianmin_players)
     
     games_white = games.merge(students.rename({'username': 'white_username_class'}, axis=1),
                left_on='white_username', right_on='white_username_class', how='left')
