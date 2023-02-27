@@ -218,7 +218,6 @@ def class_games(n):
             except:
                 pass
     df = pd.concat(result_df)
-    df.pop("Unnamed: 0")
     return df
         
 
