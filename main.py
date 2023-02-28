@@ -269,6 +269,8 @@ def main():
     new_df = same_class(df)
     filter_df = filter_game(new_df)
     filter_df.to_csv("game_class.csv")
+    nr_user = filter_df['username'].unique()
+    logger.info(f'{nr_user} of users have been fetched.')
 
 if __name__ == "__main__":
     main()
