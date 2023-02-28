@@ -270,8 +270,9 @@ def main():
     filter_df = filter_game(new_df)
     filter_df.to_csv("game_class.csv")
     nr_user = filter_df['username'].nunique()
+    old_nr_user = df['username'].nunique()
     logger.info(f'{nr_user} of users have been fetched.')
-    logger.info(f'{df['username'].nunique()} of users have been fetched - before filtered.')
+    logger.info(f'{old_nr_user} of users have been fetched - before filtered.')
 
 if __name__ == "__main__":
     main()
