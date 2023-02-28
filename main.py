@@ -256,7 +256,7 @@ def filter_game(df):
     """
     return a dataframe that contains only relevant games
     """
-    new_df = df.loc[df['time_control'] == '900+15']
+    new_df = df.loc[df['time_control'] == '900+10']
     new_df = new_df.loc[new_df['initial_setup'] == 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1']
     return new_df
     
