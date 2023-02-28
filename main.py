@@ -238,22 +238,21 @@ def game_class():
     games = class_games(3)
     students = student_df(tianmin_players)
     
-    students['username'] = students['username'].str.lower()
-    games['white_username'] = games['white_username'].str.lower()
-    games['black_username'] = games['black_username'].str.lower()
+    students['username_lower'] = students['username'].str.lower()
+    games['white_username_lower'] = games['white_username'].str.lower()
+    games['black_username_lower'] = games['black_username'].str.lower()
 
-    games_white = games.merge(students.rename({'username': 'white_username_class'}, axis=1),
-               left_on='white_username', right_on='white_username_class', how='left')
+    games_white = games.merge(students.rename({'username_lower': 'white_username_class_lower'}, axis=1),
+               left_on='white_username_lower', right_on='white_username_class_lower', how='left')
 
-    games_white_black = games_white.merge(students.rename({'username': 'black_username_class'}, axis=1),
-               left_on='black_username', right_on='black_username_class', how='left')
-
-    df = games_white_black[['username', 'uuid', 'url', 'initial_setup', 'time_class',
-       'time_control', 'end_time', 'white_username', 'black_username',
-       'Result', 'StartTime', 'UTCDate', 'class_x','class_y']]
-
-    df = df.rename(columns={"class_x": "white_user_class", "class_y": "black_user_class"})
+    games_white_black = games_white.merge(students.rename({'username_lower': 'black_username_class_lower'}, axis=1),
+               left_on='black_username_lower', right_on='black_username_class_lower', how='left')
     
+    df = games_white_black.rename(columns={"class_x": "white_user_class", "class_y": "black_user_class"})
+
+    df = df[['username', 'uuid', 'url', 'initial_setup', 'time_class',
+       'time_control', 'end_time', 'white_username', 'black_username',
+       'Result', 'StartTime', 'UTCDate', 'white_user_class','black_user_class']]    
     return df
 
 def filter_game(df):
@@ -272,7 +271,9 @@ def main():
     df = game_class()
     new_df = same_class(df)
     filter_df = filter_game(new_df)
-    filter_df.to_csv("game_class.csv")
+    filter_df_cols = filter_df[['white_username', 'black_username','end_time', 
+       'StartTime', 'UTCDate', 'Result', 'white_user_class','black_user_class']]   
+    filter_df_cols.to_csv("game_class.csv")
 
 if __name__ == "__main__":
     main()
