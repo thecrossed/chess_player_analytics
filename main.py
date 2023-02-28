@@ -238,6 +238,10 @@ def game_class():
     games = class_games(3)
     students = student_df(tianmin_players)
     
+    students['username'] = students['username'].str.lower()
+    games['white_username'] = games['white_username'].str.lower()
+    games['black_username'] = games['black_username'].str.lower()
+
     games_white = games.merge(students.rename({'username': 'white_username_class'}, axis=1),
                left_on='white_username', right_on='white_username_class', how='left')
 
