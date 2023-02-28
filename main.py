@@ -273,8 +273,8 @@ def main():
     df = game_class()
     new_df = same_class(df)
     filter_df = filter_game(new_df)
-    filter_df_cols = filter_df[['white_username', 'black_username','end_time', 
-       'StartTime', 'UTCDate', 'Result', 'white_user_class','black_user_class']]   
+    filter_df_cols = filter_df[['white_username', 'black_username', 'UTCDate', 
+       'StartTime', 'end_time','Result', 'white_user_class','black_user_class']]   
     filter_df_cols = filter_df_cols.sort_values(by = ['white_user_class','UTCDate','white_username','black_username'], ascending = False)
     filter_df_cols.to_csv("game_class.csv")
 
