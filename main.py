@@ -252,6 +252,14 @@ def game_class():
     
     return df
 
+def filter_game(df):
+    """
+    return a dataframe that contains only relevant games
+    """
+    new_df = df.loc[df['time_control'] == '900+15']
+    new_df = new_df.loc[new_df['initial_setup'] == 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1']
+    return new_df
+    
 def main():
     # df = class_games(3)
     # df.to_csv("game_result.csv")
@@ -259,7 +267,8 @@ def main():
     # student_data.to_csv("student_data.csv")
     df = game_class()
     new_df = same_class(df)
-    new_df.to_csv("game_class.csv")
+    filter_df = filter_game(new_df)
+    filter_df.to_csv("game_class.csv")
 
 if __name__ == "__main__":
     main()
