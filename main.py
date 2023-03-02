@@ -51,7 +51,8 @@ tianmin_players = {
             'AliceCLi',
             'yumitang',
             'james2945',
-            'Oinkoinkw'],
+            'Oinkoinkw',
+           'DDisawesome'], # this is the new username for Oinkoinkw (Winston Rao)
     "AN" : ['Cathye1',
             'lunathekitsune',
             'ArthurRocket',
