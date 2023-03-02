@@ -265,6 +265,20 @@ def filter_game(df):
     new_df = new_df.drop_duplicates(subset=['uuid'])
     
     return new_df
+
+def replace_username(df, old_name, new_name):
+    """
+    input 
+    df - target df
+    old_name - old username that is to be replaced
+    new_name - new username that is replacing the old one
+    
+    output -
+    return a dataframe that the old username has been replaced
+    """
+    
+    df = df.replace({old_name: new_name})
+    return df
     
 def main():
     # df = class_games(3)
@@ -272,7 +286,8 @@ def main():
     #student_data = student_df(tianmin_players)
     # student_data.to_csv("student_data.csv")
     df = game_class()
-    new_df = same_class(df)
+    df_newname = replace_username(df, "Oinkoinkw","DDisawesome")
+    new_df = same_class(df_newname)
     filter_df = filter_game(new_df)
     filter_df_cols = filter_df[['white_username', 'black_username', 'url','UTCDate', 
        'StartTime', 'end_time','Result', 'white_user_class','black_user_class']]   
