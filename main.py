@@ -9,6 +9,7 @@ from chessdotcom import get_player_profile, get_player_stats, get_player_game_ar
 import chess.pgn
 from converter.pgn_data import PGNData
 from datetime import date
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 logger = logging.getLogger(__name__)
@@ -336,12 +337,12 @@ def main():
        'StartTime', 'end_time','Result', 'white_user_class','black_user_class']]   
     filter_df_cols = filter_df_cols.sort_values(by = ['white_user_class','UTCDate','white_username','black_username'], ascending = False)
     filter_df_cols.to_csv("game_class.csv")
-    
+    now = datetime.now()
     for classname in filter_df_cols['white_user_class'].unique():
         class_df = class_select(filter_df_cols, classname)
         first_game_df = first_game(class_df)
         class_result = class_pivot(first_game_df)
-        class_result.to_csv("{}_class_result.csv".format(classname))
+        class_result.to_csv("{}_class_result_{}.csv".format(name, now))
         
 
 if __name__ == "__main__":
