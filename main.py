@@ -311,9 +311,9 @@ def class_pivot(df):
     """
     Return a pivoted table where row/column representing each player and each cell storing the game result
     """
+    df = df.replace({'1/2': 0.5})
     df['white_result'] = df['white_result'].astype(float)
     df['black_result'] = df['black_result'].astype(float)
-    df = df.replace({'1/2': 0.5})
     white_username_index = df.pivot(index='white_username', columns='black_username', values='white_result').reset_index()
     white_username_index = white_username_index.rename(columns={"white_username": "player"})
     
