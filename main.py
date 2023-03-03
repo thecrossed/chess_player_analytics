@@ -279,6 +279,22 @@ def replace_username(df, old_name, new_name):
     
     df = df.replace({old_name: new_name})
     return df
+
+def first_game(df):
+    """
+    only remain the first game played between each pair of players, regardless white or black
+    """
+    df[['white_result', 'black_result']] = df["Result"].apply(lambda x: pd.Series(str(x).split("-")))
+
+    players = pd.DataFrame(np.sort(df[['white_username','black_username']].values, axis=1), columns=df[['white_username','black_username']].columns)
+    
+    df['players'] = players.values.tolist()
+    df['players'] = df['players'].astype(str)
+    
+    df['start_date_time'] = pd.to_datetime(df['UTCDate'] + ' ' + df['StartTime'])
+    df["rank"] = df.groupby("players")["start_date_time"].rank(method="dense", ascending=True)
+    df_first_game = df.loc[df['rank'] == 1]
+    return df_first_game
     
 def main():
     # df = class_games(3)
