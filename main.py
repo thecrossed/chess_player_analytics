@@ -318,7 +318,7 @@ def class_pivot(df):
     white_username_index = df.pivot(index='white_username', columns='black_username', values='white_result').reset_index()
     white_username_index = white_username_index.rename(columns={"white_username": "player"})
     
-    black_username_index = df.pivot(index='black_username', columns='white_username', values='white_result').reset_index()
+    black_username_index = df.pivot(index='black_username', columns='white_username', values='black_result').reset_index()
     black_username_index = black_username_index.rename(columns={"black_username": "player"})
     
     merge = white_username_index.append(black_username_index)
