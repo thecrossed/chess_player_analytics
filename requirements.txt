@@ -7,3 +7,4 @@ pandas
 parsita
 pgn2data
 python-dateutil
+numpy
