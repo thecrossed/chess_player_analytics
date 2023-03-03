@@ -313,7 +313,7 @@ def class_pivot(df):
     """
     df['white_result'] = df['white_result'].astype(int)
     df['black_result'] = df['black_result'].astype(int)
-    
+    df = df.replace({'1/2': 0.5})
     white_username_index = df.pivot(index='white_username', columns='black_username', values='white_result').reset_index()
     white_username_index = white_username_index.rename(columns={"white_username": "player"})
     
