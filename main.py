@@ -342,7 +342,7 @@ def main():
         class_df = class_select(filter_df_cols, classname)
         first_game_df = first_game(class_df)
         class_result = class_pivot(first_game_df)
-        class_result.to_csv("{}_class_result_{}.csv".format(classname, now))
+        class_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
 
 if __name__ == "__main__":
