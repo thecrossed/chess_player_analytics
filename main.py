@@ -280,6 +280,16 @@ def replace_username(df, old_name, new_name):
     df = df.replace({old_name: new_name})
     return df
 
+def class_select(df, classname):
+    """
+    input:
+    df - targeted df
+    classname - str, class name
+    """
+    class_df = df.loc[df['white_user_class'] == classname]
+    
+    return class_df
+
 def first_game(df):
     """
     only remain the first game played between each pair of players, regardless white or black
@@ -295,12 +305,28 @@ def first_game(df):
     df["rank"] = df.groupby("players")["start_date_time"].rank(method="dense", ascending=True)
     df_first_game = df.loc[df['rank'] == 1]
     return df_first_game
+
+def class_pivot(df):
+    """
+    Return a pivoted table where row/column representing each player and each cell storing the game result
+    """
+    df['white_result'] = df['white_result'].astype(int)
+    df['black_result'] = df['black_result'].astype(int)
+    
+    white_username_index = df.pivot(index='white_username', columns='black_username', values='white_result').reset_index()
+    white_username_index = white_username_index.rename(columns={"white_username": "player"})
+    
+    black_username_index = df.pivot(index='black_username', columns='white_username', values='white_result').reset_index()
+    black_username_index = black_username_index.rename(columns={"black_username": "player"})
+    
+    merge = white_username_index.append(black_username_index)
+    
+    merge_aggr = merge.groupby(['player']).max().reset_index()
+    
+    return merge_aggr
+
     
 def main():
-    # df = class_games(3)
-    # df.to_csv("game_result.csv")
-    #student_data = student_df(tianmin_players)
-    # student_data.to_csv("student_data.csv")
     df = game_class()
     df_newname = replace_username(df, "Oinkoinkw","DDisawesome")
     new_df = same_class(df_newname)
@@ -309,6 +335,13 @@ def main():
        'StartTime', 'end_time','Result', 'white_user_class','black_user_class']]   
     filter_df_cols = filter_df_cols.sort_values(by = ['white_user_class','UTCDate','white_username','black_username'], ascending = False)
     filter_df_cols.to_csv("game_class.csv")
+    
+    for classname in filter_df_cols['white_user_class'].unique():
+        class_df = class_select(filter_df_cols, classname)
+        first_game_df = first_game(class_df)
+        class_result = class_pivot(first_game_df)
+        class_result.to_csv("{}_class_result.csv".format(classname))
+        
 
 if __name__ == "__main__":
     main()
