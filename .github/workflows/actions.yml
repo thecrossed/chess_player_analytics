@@ -1,6 +1,8 @@
 name: run main.py
 
-on: [push]
+on: 
+  schedule:
+    - cron: '0 */1 * * *' # every 1 hours
 
 
 jobs:
