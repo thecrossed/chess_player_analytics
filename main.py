@@ -3,6 +3,7 @@ import logging.handlers
 import os
 import io
 import pandas as pd
+import numpy as np
 import requests
 from chessdotcom import get_player_profile, get_player_stats, get_player_game_archives
 import chess.pgn
