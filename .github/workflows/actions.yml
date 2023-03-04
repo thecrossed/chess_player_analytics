@@ -2,6 +2,8 @@ name: run main.py
 
 on: [push]
 
+env:
+    cred: ${{ secrets.SOME_SECRET }}
 
 jobs:
   build:
