@@ -334,7 +334,7 @@ def main():
     new_df = same_class(df_newname)
     filter_df = filter_game(new_df)
     filter_df_cols = filter_df[['white_username', 'black_username', 'url','UTCDate', 
-       'StartTime', 'end_time','Result', 'white_user_class','black_user_class']]   
+       'StartTime', 'end_time','Result', 'white_user_class','black_user_class','start_date_time']]   
     filter_df_cols = filter_df_cols.sort_values(by = ['white_user_class','UTCDate','white_username','black_username'], ascending = False)
     filter_df_cols.to_csv("game_class.csv")
     now = datetime.now()
