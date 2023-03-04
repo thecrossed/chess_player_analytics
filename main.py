@@ -24,7 +24,9 @@ scope = [
 
 CRED = os.environ["cred"]
 
-client = gspread.authorize(CRED)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(CRED, scope)
+
+client = gspread.authorize(creds)
 
 sheet = client.open("RCC_chess_game_result_python").sheet1  # Open the spreadhseet
 
@@ -242,7 +244,7 @@ def class_games(n):
     for classes in tianmin_players.keys():
         for player in tianmin_players[classes]:
             try:
-                logger.info(f'The game of this : {player} is being proccessed...')
+                #logger.info(f'The game of this : {player} is being proccessed...')
                 months = last_n_month(n)
                 files = get_user_archives(player,months)
                 for file in files: 
