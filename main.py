@@ -21,9 +21,9 @@ scope = [
          "https://www.googleapis.com/auth/drive"
 ]
 
-
+logger = logging.getLogger(__name__)
 CRED = os.environ["cred"]
-
+logger.info(CRED)
 creds = ServiceAccountCredentials.from_json_keyfile_dict(dict(CRED), scope)
 
 client = gspread.authorize(creds)
