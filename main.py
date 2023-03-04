@@ -12,6 +12,8 @@ from datetime import date
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
+CRED = os.environ["cred"]
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 logger_file_handler = logging.handlers.RotatingFileHandler(
@@ -24,13 +26,15 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
+""" SECRET
 try:
     SOME_SECRET = os.environ["SOME_SECRET"]
 except KeyError:
     SOME_SECRET = "Token not available!"
-    #logger.info("Token not available!")
+    logger.info("Token not available!")
     #raise
-    
+"""
+
 # students from Tianmin's classes - BO, BP, AN
 tianmin_players = {
     "Teacher" : ['tianminlyu'],
