@@ -258,7 +258,7 @@ def game_class():
     df = games_white_black.rename(columns={"class_x": "white_user_class", "class_y": "black_user_class"})
     df['start_date_time'] = pd.to_datetime(df['UTCDate'] + ' ' + df['StartTime'])
     df = df[['username', 'uuid', 'url', 'initial_setup', 'time_class',
-       'time_control', 'end_time', 'white_username', 'black_username',
+       'time_control', 'end_time', 'white_username', 'black_username', 'rated',
        'Result', 'StartTime', 'UTCDate', 'white_user_class','black_user_class','start_date_time']]    
     return df
 
