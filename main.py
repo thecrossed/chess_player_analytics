@@ -172,6 +172,11 @@ def game_result(username,file):
             UTCDate.append(game_data.headers['UTCDate'])
         except Exception as e:
             print(e)
+            result.append(None)
+            start_time.append(None)
+            end_time.append(None)
+            UTCDate.append(None)
+            
     df = pd.DataFrame(list(zip(usernames,  
                            uuid,
                            url,
