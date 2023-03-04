@@ -162,7 +162,7 @@ def game_result(username,file):
             time_control.append(game.get('time_control',None))
             white_username.append(game.get('white',None)['username'])
             black_username.append(game.get('black',None)['username'])
-            pgn_written = io.StringIO(game['pgn'])
+            pgn_written = io.StringIO(game.get('pgn',None)) # game['pgn']
             game_data = chess.pgn.read_game(pgn_written)
             result.append(game_data.headers['Result'])
             start_time.append(game_data.headers['StartTime'])
