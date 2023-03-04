@@ -8,3 +8,5 @@ parsita
 pgn2data
 python-dateutil
 numpy
+gspread
+oauth2client
