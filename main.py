@@ -238,7 +238,7 @@ def game_class():
     """
     output - a dataframe that have column white_user_class indicate the class of the white username and black_user_class for black
     """
-    games = class_games(3)
+    games = class_games(5)
     students = student_df(tianmin_players)
     
     students['username_lower'] = students['username'].str.lower()
@@ -252,10 +252,10 @@ def game_class():
                left_on='black_username_lower', right_on='black_username_class_lower', how='left')
     
     df = games_white_black.rename(columns={"class_x": "white_user_class", "class_y": "black_user_class"})
-
+    df['start_date_time'] = pd.to_datetime(df['UTCDate'] + ' ' + df['StartTime'])
     df = df[['username', 'uuid', 'url', 'initial_setup', 'time_class',
        'time_control', 'end_time', 'white_username', 'black_username',
-       'Result', 'StartTime', 'UTCDate', 'white_user_class','black_user_class']]    
+       'Result', 'StartTime', 'UTCDate', 'white_user_class','black_user_class','start_date_time']]    
     return df
 
 def filter_game(df):
@@ -263,6 +263,7 @@ def filter_game(df):
     return a dataframe that contains only relevant games
     """
     new_df = df.loc[df['time_control'].isin(['900+10','600+5','600'])]
+    new_df = new_df.loc[new_df['start_date_time'] >= '2023-02-17']
     new_df = new_df.loc[new_df['initial_setup'] == 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1']
     new_df = new_df.drop_duplicates(subset=['uuid'])
     
@@ -303,7 +304,6 @@ def first_game(df):
     df['players'] = players.values.tolist()
     df['players'] = df['players'].astype(str)
     
-    df['start_date_time'] = pd.to_datetime(df['UTCDate'] + ' ' + df['StartTime'])
     df["rank"] = df.groupby("players")["start_date_time"].rank(method="dense", ascending=True)
     df_first_game = df.loc[df['rank'] == 1]
     return df_first_game
