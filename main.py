@@ -12,7 +12,7 @@ from datetime import date
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import gspread
-from oauth2clients.service_account import ServiceAccountCredentials
+from oauth2client.service_account import ServiceAccountCredentials
 
 scope = [
          "https://spreadsheets.google.com/feeds",
