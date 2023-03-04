@@ -11,8 +11,25 @@ from converter.pgn_data import PGNData
 from datetime import date
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import gspread
+from oauth2clients.service_account import ServiceAccountCredentials
+
+scope = [
+         "https://spreadsheets.google.com/feeds",
+         "https://www.googleapis.com/auth/spreadsheets",
+         "https://www.googleapis.com/auth/drive.file",
+         "https://www.googleapis.com/auth/drive"
+]
+
 
 CRED = os.environ["cred"]
+
+client = gspread.authorize(CRED)
+
+sheet = client.open("RCC_chess_game_result_python").sheet1  # Open the spreadhseet
+
+data = sheet.get_all_records()  # Get a list of all records
+row = sheet.row_values(3)  # Get a specific row
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -25,6 +42,9 @@ logger_file_handler = logging.handlers.RotatingFileHandler(
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
+
+logger.info(row)
+
 
 """ SECRET
 try:
@@ -358,6 +378,7 @@ def main():
         class_result = class_pivot(first_game_df)
         class_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
-
+"""
 if __name__ == "__main__":
     main()
+"""
