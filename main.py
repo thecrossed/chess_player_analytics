@@ -149,6 +149,7 @@ def game_result(username,file):
     black_username = []
     result = []
     UTCDate = []
+    rated = []
     
     games = get_archive_games(file)
     
@@ -162,6 +163,7 @@ def game_result(username,file):
             time_control.append(game.get('time_control',None))
             white_username.append(game.get('white',None)['username'])
             black_username.append(game.get('black',None)['username'])
+            rated.append(game.get('rated',None))
             pgn_written = io.StringIO(game.get('pgn',None)) # game['pgn']
             game_data = chess.pgn.read_game(pgn_written)
             result.append(game_data.headers['Result'])
@@ -179,6 +181,7 @@ def game_result(username,file):
                            end_time,
                            white_username,
                            black_username,
+                           rated,
                            result,
                            start_time,
                            UTCDate
@@ -192,6 +195,7 @@ def game_result(username,file):
                          'end_time',
                          'white_username',
                          'black_username',
+                         'rated',
                          'Result',
                          'StartTime',
                          'UTCDate'
@@ -263,6 +267,7 @@ def filter_game(df):
     return a dataframe that contains only relevant games
     """
     new_df = df.loc[df['time_control'].isin(['900+10','600+5','600'])]
+    new_df = new_df.loc[new_df['rated'] == True]
     new_df = new_df.loc[new_df['start_date_time'] >= '2023-02-17']
     new_df = new_df.loc[new_df['initial_setup'] == 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1']
     new_df = new_df.drop_duplicates(subset=['uuid'])
