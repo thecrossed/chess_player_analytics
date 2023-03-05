@@ -20,6 +20,7 @@ scope = [
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/drive"
 ]
+creds = ServiceAccountCredentials.from_json_keyfile_name(os.environ["cred"], scope)
 
 CRED = os.environ["cred"]
 cred = os.environ["SOME_SECRET"]
