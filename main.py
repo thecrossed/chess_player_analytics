@@ -13,18 +13,9 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from df2gspread import df2gspread as d2g
 
-scope = [
-         "https://spreadsheets.google.com/feeds",
-         "https://www.googleapis.com/auth/spreadsheets",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive"
-]
-creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
-client = gspread.authorize(creds)
-sheet = client.open("RCC_chess_game_result_python").sheet1  # Open the spreadhseet
-data = sheet.get_all_records()  # Get a list of all records
-row = sheet.row_values(3)  # Get a specific row
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -355,6 +346,34 @@ def class_pivot(df):
     
     return merge_aggr
 
+def sheet_cred():
+    """
+    pass credential of the sheet that we want to upload the df
+    """
+    scope = [
+         "https://spreadsheets.google.com/feeds",
+         "https://www.googleapis.com/auth/spreadsheets",
+         "https://www.googleapis.com/auth/drive.file",
+         "https://www.googleapis.com/auth/drive"
+         ]
+         creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
+         client = gspread.authorize(creds)
+
+def upload_df(df):
+    """
+    upload df to google sheet RCC_chess_game_result_python
+    each class/csv/file represent one sheet
+    """
+    spreadsheet_key = '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA' # sheet url from RCC_chess_game_result_python
+    scope = [
+         "https://spreadsheets.google.com/feeds",
+         "https://www.googleapis.com/auth/spreadsheets",
+         "https://www.googleapis.com/auth/drive.file",
+         "https://www.googleapis.com/auth/drive"
+         ]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
+    wks_name = df
+    d2g.upload(df, spreadsheet_key, wks_name, credentials=creds)  
     
 def main():
     df = game_class()
@@ -365,14 +384,15 @@ def main():
        'StartTime', 'end_time','Result', 'white_user_class','black_user_class','start_date_time']]   
     filter_df_cols = filter_df_cols.sort_values(by = ['white_user_class','UTCDate','white_username','black_username'], ascending = False)
     filter_df_cols.to_csv("game_class.csv")
+    #sheet_cred()
     now = datetime.now()
     for classname in filter_df_cols['white_user_class'].unique():
         class_df = class_select(filter_df_cols, classname)
         first_game_df = first_game(class_df)
         class_result = class_pivot(first_game_df)
+        upload_df(classname)
         class_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
-"""
+
 if __name__ == "__main__":
     main()
-"""
