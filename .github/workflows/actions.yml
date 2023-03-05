@@ -33,6 +33,10 @@ jobs:
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: python main.py
+        
+      - name: remove credential key file
+        run: 'rm rf- ./creds.json'
+        shell: bash
           
       - name: commit files
         run: |
