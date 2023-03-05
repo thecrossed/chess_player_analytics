@@ -26,7 +26,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
 #cred = os.environ["SOME_SECRET"]
 keyfile = os.environ["KEYFILE"]
 #logger.info(CRED)
-creds = ServiceAccountCredentials.from_json_keyfile_dict(CRED, scope)
+#creds = ServiceAccountCredentials.from_json_keyfile_dict(CRED, scope)
 
 client = gspread.authorize(creds)
 
