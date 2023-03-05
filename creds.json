@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rcc-game-result",
+  "private_key_id": "4108373fae4b2d0dffc079bd45462ddbdc14b52b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDZurtyOx5tgmoG\n5JB2D9gglXjSp5BjHv/ISzt8tzUt/Q+8R9sh/PrEJ4LJJfE4nRHmdIzuTSIULdmf\n1ThCsUa4Hwmas2miSpqN5ofd/jas/R5T1WVMDIT8V7bGa+ufwuJMuKDrUPU5x99z\na+rOmmvzSoqfAG+BoUkWMvboQ36AsIka1szzjWXkq3svjSpr1ck4d8drDvdSraRE\n+9gKI2pCxT9ARJpz8hWDFFTslcO/7oGvYLcJAMrghdODeJ8+XTqyoPwy84qoZkni\ntBF0xJPVEuGAOOsiOAzhpkQKUUiBHVKGynUW6LySFKSFfKh9SOdz83qXoyhwe8j/\n5Jhso9bBAgMBAAECggEAGtzw9e85BK4zp7Bj6cpwUiuERzVOWV8V6YqYByim1+A3\npKAW93K6JnZw1UwoSWGzt4PHbuVhtYH8rj2FM1FNAOLaHACpIVFkD+rn9inrFAfS\nHz9zv+DG4vLC2xNYnxL75GxedPoS73NAwgGywZUy3scNIwCk6/ulbqbmE2e0asBi\n6cojEEU2gwpMDVnA8jCb93EtHgeoLtK0KxMEMyoExZfQ9j/FGd7GQRc5rZ7AWI6C\nFU6BdIvdrxGJe3hYbEtVk49LMLptnrIm8WxdNMMfPWUdl0w2Ax+JSUo4YczpRhmS\nCilgVHReF4BcdQoViCqr/oW+tGn8zUgtOsl/3zfvqwKBgQDu28SP2VXxGaTQIRSs\ndf7eb1T84n4CVMUXKkN7f2sQTEoWFUjd1K0zYeTv5yBV0/sQV7p+WWlNGS5BDpfC\njWZGDuyfxFmF/2cnnxqYGQn9JEmexe9Cc2zSC2Npk99XtfRM2TK0fMxBPm2qetSE\nBfK89EUycbHt1MP50ZU3wzVQOwKBgQDpWsnLQpiLT7W8eb9KeibH1MGIuJIG1pxp\n57b/J3E6gpHlfe5pnWu/aGZ/A5knYiCvqTgisN5+KnwQdC0+9zoBdcDy3Cs/tT2U\nVBhpd1OGEYCgh4V7WF7HwdnAY8b+YXupZuyiSDR+n6N0BCDRmRBvMgrJO5o4NZqH\nRrUnuXPhMwKBgC7Gds28v+nBHddsQwIq8UhaAQisygRm2VnZ+vEaWLsOVYvRiz11\nwp1HVG/ukRR9uLLQm0LW+5oPjlFLLEj7K8YYchovd2CYTXki3TBf5ubdzlT7aglX\nVT4k4MjyHlCs3zSVbCqQLeew9ATonOllyM1cAJkKTs/GVMJ9Wn1bCvu1AoGADZ6X\n4n4bix323G46pO0mMEmRlho3o6CI9oFoo9G4gRK30y4baRyf+kbsnIMoQC0w/S+i\nMBwkkDaIkSlGrsMdJpKp1ULWX1yDoJGb7yPgwxVobXYba0yIE56Tx+/K4HPuFMAG\nFZ6jObS1hILtK26EkAjaqk4JPTibsUOGNTBUvBMCgYEAk/NCKkmeBfuWGsGOnz/M\nUs9UEctmzLAxQvIL46vkGB3xrye4I/kgNFAr+OdqvoWlMNSQDc0b25PkVb+vgUkm\n5cKcy7ujUz3TgIrGBpjYwzGAR2lCgsw/0jo4on1Qk/cBfN4LpcEm/945/ZSrjjkt\nrn2VqRaVBLTpltqBQ/3ezcY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "tianmin-rcc@rcc-game-result.iam.gserviceaccount.com",
+  "client_id": "101359333426261053710",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tianmin-rcc%40rcc-game-result.iam.gserviceaccount.com"
+}
