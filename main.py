@@ -346,10 +346,11 @@ def class_pivot(df):
     
     return merge_aggr
 
+"""
 def sheet_cred():
-    """
+    '''
     pass credential of the sheet that we want to upload the df
-    """
+    '''
     scope = [
          "https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/spreadsheets",
@@ -358,19 +359,18 @@ def sheet_cred():
          ]
          creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
          client = gspread.authorize(creds)
-
+"""
+    
 def upload_df(df):
     """
     upload df to google sheet RCC_chess_game_result_python
     each class/csv/file represent one sheet
     """
     spreadsheet_key = '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA' # sheet url from RCC_chess_game_result_python
-    scope = [
-         "https://spreadsheets.google.com/feeds",
+    scope = ["https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/spreadsheets",
          "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive"
-         ]
+         "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
     wks_name = df
     d2g.upload(df, spreadsheet_key, wks_name, credentials=creds)  
