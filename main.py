@@ -361,10 +361,14 @@ def sheet_cred():
          client = gspread.authorize(creds)
 """
     
-def upload_df(df):
+def upload_df(name, df):
     """
     upload df to google sheet RCC_chess_game_result_python
     each class/csv/file represent one sheet
+    
+    input - 
+    name: class name, sheet tab
+    df: df that will be uploaded for each tab
     """
     spreadsheet_key = '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA' # sheet url from RCC_chess_game_result_python
     scope = ["https://spreadsheets.google.com/feeds",
@@ -372,7 +376,7 @@ def upload_df(df):
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
-    wks_name = df
+    wks_name = name
     d2g.upload(df, spreadsheet_key, wks_name, credentials=creds)  
     
 def main():
@@ -390,7 +394,7 @@ def main():
         class_df = class_select(filter_df_cols, classname)
         first_game_df = first_game(class_df)
         class_result = class_pivot(first_game_df)
-        upload_df(classname)
+        upload_df(classname, class_result)
         class_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
 
