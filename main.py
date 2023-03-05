@@ -24,6 +24,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(os.environ["cred"], sco
 
 CRED = os.environ["cred"]
 cred = os.environ["SOME_SECRET"]
+keyfile = os.environ["KEYFILE"]
 #logger.info(CRED)
 #creds = ServiceAccountCredentials.from_json_keyfile_dict(CRED, scope)
 
@@ -49,6 +50,8 @@ logger.addHandler(logger_file_handler)
 #logger.info(row)
 logger.info(type(CRED))
 logger.info(type(cred))
+logger.info(keyfile)
+
 
 
 """ SECRET
