@@ -22,7 +22,8 @@ scope = [
 ]
 
 CRED = os.environ["cred"]
-logger.info(CRED)
+cred = os.environ["SOME_SECRET"]
+#logger.info(CRED)
 #creds = ServiceAccountCredentials.from_json_keyfile_dict(CRED, scope)
 
 #client = gspread.authorize(creds)
@@ -46,6 +47,7 @@ logger.addHandler(logger_file_handler)
 
 #logger.info(row)
 logger.info(type(CRED))
+logger.info(type(cred))
 
 
 """ SECRET
