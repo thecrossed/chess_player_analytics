@@ -10,3 +10,4 @@ python-dateutil
 numpy
 gspread
 oauth2client
+df2gspread
