@@ -281,7 +281,7 @@ def filter_game(df):
     return a dataframe that contains only relevant games
     """
     new_df = df.loc[df['time_control'].isin(['900+10','600+5','600'])]
-    new_df = new_df.loc[new_df['rated'] == True]
+    #new_df = new_df.loc[new_df['rated'] == True]
     new_df = new_df.loc[new_df['start_date_time'] >= '2023-02-17']
     new_df = new_df.loc[new_df['initial_setup'] == 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1']
     new_df = new_df.drop_duplicates(subset=['uuid'])
