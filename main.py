@@ -20,20 +20,20 @@ scope = [
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/drive"
 ]
-#creds = ServiceAccountCredentials.from_json_keyfile_name(os.environ["cred"], scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
 
 #CRED = os.environ["cred"]
 #cred = os.environ["SOME_SECRET"]
 keyfile = os.environ["KEYFILE"]
 #logger.info(CRED)
-#creds = ServiceAccountCredentials.from_json_keyfile_dict(CRED, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(CRED, scope)
 
-#client = gspread.authorize(creds)
+client = gspread.authorize(creds)
 
-#sheet = client.open("RCC_chess_game_result_python").sheet1  # Open the spreadhseet
+sheet = client.open("RCC_chess_game_result_python").sheet1  # Open the spreadhseet
 
-#data = sheet.get_all_records()  # Get a list of all records
-#row = sheet.row_values(3)  # Get a specific row
+data = sheet.get_all_records()  # Get a list of all records
+row = sheet.row_values(3)  # Get a specific row
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -51,6 +51,7 @@ logger.addHandler(logger_file_handler)
 #logger.info(type(CRED))
 #logger.info(type(cred))
 logger.info(keyfile)
+logger.info(row)
 
 
 
