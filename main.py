@@ -375,7 +375,7 @@ def upload_df(name, df):
          "https://www.googleapis.com/auth/spreadsheets",
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name(KEYFILE, scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
     wks_name = name
     d2g.upload(df, spreadsheet_key, wks_name, credentials=creds)  
     
