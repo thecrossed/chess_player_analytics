@@ -3,7 +3,7 @@ name: run main.py
 on: [push]
 
 env:
-    KEYFILE: ${{ secrets.SOME_SECRET }}
+    KEYFILE: ./creds.json
 
 jobs:
   build:
@@ -23,7 +23,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-          
+      - name: create credential key file
+        run: 'echo "$KEYFILE" > ./creds.json'
+        shell: bash
+        env:
+            KEYFILE : ${{ secrets.SOME_SECRET }}
+            
       - name: execute py script # run main.py
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
