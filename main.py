@@ -360,6 +360,14 @@ def sheet_cred():
          creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
          client = gspread.authorize(creds)
 """
+def reorder_col(df):
+    """
+    reorder the game result df into something with row and column for player data share the same order
+    """
+    player_col = df.iloc[:,2:].reindex(data['player'], axis=1)
+    df = df.iloc[:,0:2].join(player_col)
+    
+    return df
 
 def rp_nan_empty(df):
     """
@@ -403,8 +411,9 @@ def main():
         class_df = class_select(filter_df_cols, classname)
         first_game_df = first_game(class_df)
         class_result = class_pivot(first_game_df)
-        upload_df(classname, class_result)
-        class_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
+        reorder_result = reorder_col(class_result)
+        upload_df(classname, reorder_result)
+        reorder_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
 
 if __name__ == "__main__":
