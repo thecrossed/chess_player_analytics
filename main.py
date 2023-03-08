@@ -365,7 +365,11 @@ def reorder_col(df):
     reorder the game result df into something with row and column for player data share the same order
     """
     player_col = df.iloc[:,2:].reindex(df['player'], axis=1)
-    df = df.iloc[:,0:2].join(player_col)
+    df = df.iloc[:,0:2]
+    
+    for col in player_col.columns:
+        df[col] = player_col[col].values
+
     
     return df
 
