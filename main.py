@@ -360,6 +360,14 @@ def sheet_cred():
          creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
          client = gspread.authorize(creds)
 """
+
+def rp_nan_empty(df):
+    """
+    replace null value in the df with "" string so that in google sheet it will turn out to be empty space, rather than 'nan'
+    """
+    df = df.fillna("")
+    
+    return df
     
 def upload_df(name, df):
     """
@@ -377,6 +385,7 @@ def upload_df(name, df):
          "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
     wks_name = name
+    df = rp_nan_empty(df)
     d2g.upload(df, spreadsheet_key, wks_name, credentials=creds)  
     
 def main():
