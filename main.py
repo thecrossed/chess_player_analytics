@@ -380,6 +380,13 @@ def rp_nan_empty(df):
     df = df.fillna("")
     
     return df
+
+def sum_score(df):
+    """
+    create a new column that indicates the sum of score per each player
+    """
+    df['score'] = df.iloc[:,2:].sum(axis=1)
+    return df
     
 def upload_df(name, df):
     """
@@ -416,8 +423,9 @@ def main():
         first_game_df = first_game(class_df)
         class_result = class_pivot(first_game_df)
         reorder_result = reorder_col(class_result)
-        upload_df(classname, reorder_result)
-        reorder_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
+        sum_result = sum_score(reorder_result)
+        upload_df(classname, sum_result)
+        sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
 
 if __name__ == "__main__":
