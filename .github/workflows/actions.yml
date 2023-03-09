@@ -7,6 +7,7 @@ on:
 
 env:
     KEYFILE: ./creds.json
+    STUDENTS: ./students.json
 
 jobs:
   build:
@@ -26,6 +27,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
+      - name: fetch student json data
+        run: 'echo "$STUDENTS" > ./students.json'
+        shell: bash
+        env:
+            STUDENTS : ${{ secrets.STUDENTS }}
+          
       - name: create credential key file
         run: 'echo "$KEYFILE" > ./creds.json'
         shell: bash
@@ -36,6 +43,10 @@ jobs:
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: python main.py
+        
+      - name: remove student json key file
+        run: 'rm ./students.json'
+        shell: bash
         
       - name: remove credential key file
         run: 'rm ./creds.json'
