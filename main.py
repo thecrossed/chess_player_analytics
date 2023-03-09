@@ -30,8 +30,6 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
-SOME_SECRET = os.environ["STUDENTS"]
-print(SOME_SECRET)
 
 """ SECRET
 try:
@@ -78,14 +76,11 @@ tianmin_players = {
             'ImRacoonie']
 }
 
-# create a student json file
-student_json = json.dumps(tianmin_players) 
-with open("student.json", "w") as outfile:
-    json.dump(student_json, outfile)
+
     
     
 # load data from student json
-with open('student.json') as user_file:
+with open("./students.json") as user_file:
     file_contents = user_file.read()
     
 parsed_json = json.loads(json.loads(file_contents))
