@@ -238,8 +238,8 @@ def class_games(n):
     return a dataframe that contains what game_result function returns for each player in the classes
     """
     result_df = []
-    for classes in tianmin_players.keys():
-        for player in tianmin_players[classes]:
+    for classes in parsed_json.keys():
+        for player in parsed_json[classes]:
             try:
                 #logger.info(f'The game of this : {player} is being proccessed...')
                 months = last_n_month(n)
@@ -271,7 +271,7 @@ def game_class():
     output - a dataframe that have column white_user_class indicate the class of the white username and black_user_class for black
     """
     games = class_games(5)
-    students = student_df(tianmin_players)
+    students = student_df(parsed_json)
     
     students['username_lower'] = students['username'].str.lower()
     games['white_username_lower'] = games['white_username'].str.lower()
