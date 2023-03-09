@@ -359,7 +359,7 @@ def sum_score(df):
     df['score'] = df.iloc[:,2:].sum(axis=1)
     return df
     
-def upload_df(name, df):
+def upload_df(name, df, sheet_id):
     """
     upload df to google sheet RCC_chess_game_result
     each class/csv/file represent one sheet
@@ -367,8 +367,9 @@ def upload_df(name, df):
     input - 
     name: class name, sheet tab
     df: df that will be uploaded for each tab
+    sheet_id : sheet url
     """
-    spreadsheet_key = '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA' # sheet url from RCC_chess_game_result
+    # spreadsheet_key = '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA' # sheet url from RCC_chess_game_result
     scope = ["https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/spreadsheets",
          "https://www.googleapis.com/auth/drive.file",
@@ -376,7 +377,7 @@ def upload_df(name, df):
     creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
     wks_name = name
     df = rp_nan_empty(df)
-    d2g.upload(df, spreadsheet_key, wks_name, credentials=creds)  
+    d2g.upload(df, sheet_id, wks_name, credentials=creds)  
     
 def main():
     df = game_class()
@@ -395,7 +396,8 @@ def main():
         class_result = class_pivot(first_game_df)
         reorder_result = reorder_col(class_result)
         sum_result = sum_score(reorder_result)
-        upload_df(classname, sum_result)
+        upload_df(classname, sum_result, '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA') # result sheet
+        upload_df(classname, class_result, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o') # game sheet
         sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
 
