@@ -84,7 +84,7 @@ with open("student.json", "w") as outfile:
     
     
 # load data from student json
-with open('sample.json') as user_file:
+with open('student.json') as user_file:
     file_contents = user_file.read()
     
 parsed_json = json.loads(json.loads(file_contents))
