@@ -38,7 +38,7 @@ jobs:
         run: 'echo "$MIDDLE_STUDENTS" > ./mid_students.json'
         shell: bash
         env:
-            STUDENTS : ${{ secrets.MIDDLE_STUDENTS }}
+            MIDDLE_STUDENTS : ${{ secrets.MIDDLE_STUDENTS }}
                       
       - name: create credential key file
         run: 'echo "$KEYFILE" > ./creds.json'
