@@ -5,6 +5,7 @@ import io
 import pandas as pd
 import numpy as np
 import requests
+import json
 from chessdotcom import get_player_profile, get_player_stats, get_player_game_archives
 import chess.pgn
 from converter.pgn_data import PGNData
@@ -75,6 +76,11 @@ tianmin_players = {
             'jaydenlan0118',
             'ImRacoonie']
 }
+
+# create a student json file
+student_json = json.dumps(tianmin_players) 
+with open("student.json", "w") as outfile:
+    json.dump(student_json, outfile)
 
 def student_df(student_data):
     """
