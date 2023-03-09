@@ -8,7 +8,7 @@ on:
 env:
     KEYFILE: ./creds.json
     STUDENTS: ./students.json
-    MID_STUDENTS: ./mid_students.json
+    MIDDLE_STUDENTS: ./mid_students.json
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
             STUDENTS : ${{ secrets.STUDENTS }}
             
       - name: fetch middle student json data
-        run: 'echo "$MID_STUDENTS" > ./mid_students.json'
+        run: 'echo "$MIDDLE_STUDENTS" > ./mid_students.json'
         shell: bash
         env:
             STUDENTS : ${{ secrets.MIDDLE_STUDENTS }}
