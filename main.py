@@ -43,9 +43,9 @@ except KeyError:
 
     
 # load data from student json
-with open("./mid_students.json") as user_file:
-    file_contents = user_file.read()
-parsed_json = json.loads(json.loads(file_contents))
+with open("./mid_students.json") as student_file:
+    contents = student_file.read()
+parsed_json = json.loads(json.loads(contents))
 
 
 def student_df(student_data):
