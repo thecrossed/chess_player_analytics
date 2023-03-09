@@ -55,9 +55,6 @@ jobs:
         run: 'rm ./students.json'
         shell: bash
         
-      - name: remove middle student json key file
-        run: 'rm ./mid_students.json'
-        shell: bash
         
       - name: remove credential key file
         run: 'rm ./creds.json'
