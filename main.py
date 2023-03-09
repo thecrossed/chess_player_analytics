@@ -390,14 +390,14 @@ def sum_score(df):
     
 def upload_df(name, df):
     """
-    upload df to google sheet RCC_chess_game_result_python
+    upload df to google sheet RCC_chess_game_result
     each class/csv/file represent one sheet
     
     input - 
     name: class name, sheet tab
     df: df that will be uploaded for each tab
     """
-    spreadsheet_key = '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA' # sheet url from RCC_chess_game_result_python
+    spreadsheet_key = '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA' # sheet url from RCC_chess_game_result
     scope = ["https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/spreadsheets",
          "https://www.googleapis.com/auth/drive.file",
