@@ -30,7 +30,8 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
-
+SOME_SECRET = os.environ["STUDENTS"]
+print(SOME_SECRET)
 
 """ SECRET
 try:
