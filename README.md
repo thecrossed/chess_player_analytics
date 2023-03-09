@@ -51,7 +51,7 @@ f. generate a csv file with a file name indicating the time when the work is don
 
 g. push the change into the repo
 
-h. Automately run the job every week
+h. Automately run the job every day
 
 i. Sending emails to relevant people that this work is done successfully or not
 
