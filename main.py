@@ -40,51 +40,12 @@ except KeyError:
     #raise
 """
 
-# students from Tianmin's classes - BO, BP, AN
-tianmin_players = {
-    "Teacher" : ['tianminlyu'],
-    "BO" : ['AGcuber19',
-            'TLPAWN',
-            'xiaoanwu',
-            'EmmaXLi',
-            'akfunchess66',
-            'Marsboom', 
-            'Claraqiu',
-            'Ravenclawfairy', 
-            'Zora_zhu',
-            'BurleyWalrus'],
-    "BP" : ['taionemm',
-            'augustinewz',
-            'oscarzhang818',
-            'yaohengli',
-            'Wallacewang1214',
-            'SophiaZ2022',
-            'AliceCLi',
-            'yumitang',
-            'james2945',
-            'Oinkoinkw',
-           'DDisawesome'], # this is the new username for Oinkoinkw (Winston Rao)
-    "AN" : ['Cathye1',
-            'lunathekitsune',
-            'ArthurRocket',
-            'vivianwwww20',
-            'ChloeWang16',
-            'Tyzalex',
-            'ZhichengW',
-            'Haochen1123',
-            'jaydenlan0118',
-            'ImRacoonie']
-}
-
-
-    
     
 # load data from student json
 with open("./students.json") as user_file:
     file_contents = user_file.read()
-    
 parsed_json = json.loads(json.loads(file_contents))
-print(parsed_json['Teacher'])
+
 
 def student_df(student_data):
     """
