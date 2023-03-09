@@ -44,10 +44,11 @@ except KeyError:
     
 # load data from student json
 with open("./mid_students.json") as student_file:
-    contents = student_file.read()
+     contents = student_file.read()
 print("测试1")    
 print(contents)
 print("测试2")
+
 parsed_json = json.loads(json.loads(contents))
 
 
