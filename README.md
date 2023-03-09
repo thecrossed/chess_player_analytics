@@ -54,3 +54,7 @@ g. push the change into the repo
 h. Automately run the job every week
 
 i. Sending emails to relevant people that this work is done successfully or not
+
+## Contact person
+
+tianminlyu@gmail.com
