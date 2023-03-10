@@ -8,7 +8,6 @@ on:
 env:
     KEYFILE: ./creds.json
     STUDENTS: ./students.json
-    MIDDLE_STUDENTS: ./mid_students.json
 
 jobs:
   build:
@@ -34,11 +33,6 @@ jobs:
         env:
             STUDENTS : ${{ secrets.STUDENTS }}
             
-      - name: fetch middle student json data
-        run: 'echo "$MIDDLE_STUDENTS" > ./mid_students.json'
-        shell: bash
-        env:
-            MIDDLE_STUDENTS : ${{ secrets.MIDDLE_STUDENTS }}
                       
       - name: create credential key file
         run: 'echo "$KEYFILE" > ./creds.json'
@@ -53,10 +47,6 @@ jobs:
         
       - name: remove student json key file
         run: 'rm ./students.json'
-        shell: bash
-      
-      - name: remove middle student json key file
-        run: 'rm ./mid_students.json'
         shell: bash
         
       - name: remove credential key file
