@@ -401,7 +401,7 @@ def main():
         upload_df(classname, sum_result, '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA') # result sheet
         upload_df(classname, class_df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o') # game sheet
         #sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
-        time.sleep(30) # prevent exceeding google api request limit 
+        #time.sleep(30) # prevent exceeding google api request limit 
         
 
 if __name__ == "__main__":
