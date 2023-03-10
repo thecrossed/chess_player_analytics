@@ -47,8 +47,6 @@ d. Filtering out the games that don't have both players are in the same class
 
 e. calculate how many seconds of each game (TA might need this info to exclude games that don't count)
 
-f. generate a csv file with a file name indicating the time when the work is done
-
 g. push the change into the repo
 
 h. Automately run the job every day
