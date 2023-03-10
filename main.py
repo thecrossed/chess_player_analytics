@@ -43,10 +43,12 @@ except KeyError:
 
     
 # load data from student json
-f = open("./students.json", "r")
-parsed_json = json.loads(json.loads(f.read()))
 
-#parsed_json = json.loads(json.loads(contents))
+with open('./students.json') as user_file:
+    file_contents = user_file.read()
+
+parsed_json = json.loads(json.loads(file_contents))
+
 
 
 def student_df(student_data):
@@ -397,15 +399,8 @@ def main():
         class_result = class_pivot(first_game_df)
         reorder_result = reorder_col(class_result)
         sum_result = sum_score(reorder_result)
-<<<<<<< HEAD
-        upload_df(classname, sum_result, '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA') # result sheet
-        upload_df(classname, class_df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o') # game sheet
-        #sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
-        #time.sleep(30) # prevent exceeding google api request limit 
-=======
         upload_df(classname, sum_result)
-        sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
->>>>>>> parent of cf6cafd (adjust upload_df func add game sheet)
+        #sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
 
 if __name__ == "__main__":
