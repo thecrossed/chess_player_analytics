@@ -43,7 +43,7 @@ except KeyError:
 
     
 # load data from student json
-f = open("./mid_students.json", "r")
+f = open("./students.json", "r")
 parsed_json = json.loads(json.loads(f.read()))
 
 #parsed_json = json.loads(json.loads(contents))
