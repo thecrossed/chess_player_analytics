@@ -49,6 +49,8 @@ with open('./students.json') as user_file:
 
 parsed_json = json.loads(json.loads(file_contents))
 
+print(parsed_json)
+
 
 
 def student_df(student_data):
@@ -402,6 +404,7 @@ def main():
         upload_df(classname, sum_result)
         #sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
-
+"""
 if __name__ == "__main__":
     main()
+"""
