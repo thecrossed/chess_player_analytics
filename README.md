@@ -51,7 +51,7 @@ g. push the change into the repo
 
 h. Automately run the job every day
 
-i. Sending emails to relevant people that this work is done successfully or not
+i. Sending game and result dataframe to [RCC_tianmin_students_games](https://docs.google.com/spreadsheets/d/1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o/edit#gid=1280403112) and [RCC_chess_game_result](https://docs.google.com/spreadsheets/d/12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA/edit#gid=976340202)
 
 ## Contact person
 
