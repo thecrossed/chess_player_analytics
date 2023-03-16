@@ -403,6 +403,7 @@ def main():
         sum_result = sum_score(reorder_result)
         upload_df(classname, sum_result, '12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA')
         upload_df(classname, class_df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+        time.sleep(60)
         #sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
         
 if __name__ == "__main__":
