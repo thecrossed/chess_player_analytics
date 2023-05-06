@@ -3,7 +3,7 @@ name: run main.py
 on:
   push:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 1 * * *"
 
 env:
     KEYFILE: ./creds.json
