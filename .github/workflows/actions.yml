@@ -1,9 +1,7 @@
 name: run main.py
 
 on:
-  # Triggers the workflow every 0 am
-  schedule:
-    - cron: "0 0 * * *"
+  push
 
 env:
     KEYFILE: ./creds.json
