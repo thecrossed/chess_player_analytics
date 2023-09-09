@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import requests
 import json
-from chessdotcom import get_player_profile, get_player_stats, get_player_game_archives
+# from chessdotcom import get_player_profile, get_player_stats, get_player_game_archives  (not working)
 import chess.pgn
 from converter.pgn_data import PGNData
 import time
@@ -41,8 +41,6 @@ except KeyError:
     SOME_SECRET = "Token not available!"
     logger.info("Token not available!")
     #raise
-"""
-
     
 # load data from student json
 with open('./students.json') as user_file:
@@ -51,7 +49,17 @@ with open('./students.json') as user_file:
 parsed_json = json.loads(json.loads(file_contents))
 
 print(parsed_json)
+"""
 
+
+students = ['yaohengli',
+           'chessloverma',
+           'chengliam',
+           'emmaxli',
+           'akfunchess66']
+
+# to request chess.com API
+user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}
 
 
 def student_df(student_data):
@@ -90,24 +98,26 @@ def last_n_month(n):
             months_lst.append(str(months.year) + "/"+ str(months.month))
     return months_lst
 
-# NOTE: the current chessdotcom package is not working
-# please check the chess_analytics_test_notebook for the new solution (ongoing)
-def get_user_archives(username, months):
+def get_user_archives(username, nr_months):
     """
     purpose:
     get archive monthly files of specific chess.com player
     
     input:
     username - username of the chess.com player
-    months - target months that we want to get the archives
+    nr_months - integer, nummber of past months that we want to get the archives
     
     output:
     target_month - files of archives according to months parameter
     """
-    archives = get_player_game_archives(username).json['archives']
+    url = "https://api.chess.com/pub/player/{username}/games/archives".format(username = username)
+    user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}
+    archive_request = requests.get(url, headers = user_agent)
+    archives = archive_request.json()['archives']
+    past_months = last_n_month(nr_months)
     target_month = []
     for archive in archives:
-        if archive[-7:] in months:
+        if archive[-7:] in past_months:
             target_month.append(archive)
     return target_month
 
@@ -124,7 +134,7 @@ def get_archive_games(filename):
     
     output: 
     """
-    games = requests.get(filename).json()['games']
+    games = requests.get(filename,headers = user_agent).json()['games']
     return games
 
 def game_result(username,file):    
@@ -445,7 +455,14 @@ def main():
         time.sleep(60)
         #sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
     """
-    print("The program is in maintainence. Stay tuned!")
+    for student in students:
+        print(student)
+        archives = get_user_archives(student,2)
+            for archive in archives[::-1]:
+                games = get_archive_games(archive)
+                for game in games[::-1]:
+                    print(datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S'))
+    print("------")
 if __name__ == "__main__":
     main()
 
