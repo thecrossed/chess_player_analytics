@@ -18,7 +18,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 from df2gspread import df2gspread as d2g
 
 
-
+"""
+input for logger
+"""
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 logger_file_handler = logging.handlers.RotatingFileHandler(
@@ -43,7 +45,6 @@ except KeyError:
 
     
 # load data from student json
-
 with open('./students.json') as user_file:
     file_contents = user_file.read()
 
@@ -55,6 +56,9 @@ print(parsed_json)
 
 def student_df(student_data):
     """
+    purpose:
+    transform student_data dictionary data into a pandas dataframe
+    
     input:
     student_data - dictionary, where key is the class and value is a list of username of each student
     
@@ -68,7 +72,9 @@ def student_df(student_data):
 
 def last_n_month(n):
     """
+    purpose:
     return the month as yyyy/mm format of the past n months from now
+    
     input -
     n: number of months from past
     
@@ -84,9 +90,13 @@ def last_n_month(n):
             months_lst.append(str(months.year) + "/"+ str(months.month))
     return months_lst
 
+# NOTE: the current chessdotcom package is not working
+# please check the chess_analytics_test_notebook for the new solution (ongoing)
 def get_user_archives(username, months):
     """
+    purpose:
     get archive monthly files of specific chess.com player
+    
     input:
     username - username of the chess.com player
     months - target months that we want to get the archives
@@ -101,8 +111,12 @@ def get_user_archives(username, months):
             target_month.append(archive)
     return target_month
 
+# NOTE: the current chessdotcom package is not working
+# please check the chess_analytics_test_notebook for the new solution (ongoing)
 def get_archive_games(filename):
     """
+    purpose:
+    
     return games in one archive file
     
     input:
@@ -113,9 +127,12 @@ def get_archive_games(filename):
     games = requests.get(filename).json()['games']
     return games
 
-def game_result(username,file):
+def game_result(username,file):    
     """
-    get username, game_starttime, game_endtime, white_username, black_username, Result from game data
+    purpose:
+    
+    get parameters such as username, game_starttime, game_endtime, white_username, black_username, Result from game data
+    
     input -
     username: of the player
     file: the file stored games data
@@ -195,6 +212,9 @@ def game_result(username,file):
 
 def class_games(n):
     """
+    purpose:
+    filter out games that don't belong to the RCC classes
+    
     input:
     n- number of past months thee data set has retrieved
     output
@@ -217,6 +237,7 @@ def class_games(n):
 
 def same_class(df):
     """
+    purpose:
     ensure that the players are from the same class
     
     input:
@@ -231,6 +252,7 @@ def same_class(df):
 
 def game_class():
     """
+    purpose:
     output - a dataframe that have column white_user_class indicate the class of the white username and black_user_class for black
     """
     games = class_games(5)
@@ -255,6 +277,8 @@ def game_class():
 
 def filter_game(df):
     """
+    purpose:
+    filter out irrelavent games (e.g. improper time control or wrong game setup) 
     return a dataframe that contains only relevant games
     """
     new_df = df.loc[df['time_control'].isin(['900+10','600+5','600'])]
@@ -267,6 +291,9 @@ def filter_game(df):
 
 def replace_username(df, old_name, new_name):
     """
+    purpose:
+    replace the username of a player
+    
     input 
     df - target df
     old_name - old username that is to be replaced
@@ -281,6 +308,9 @@ def replace_username(df, old_name, new_name):
 
 def class_select(df, classname):
     """
+    purpose:
+    filter the games that belonging to one certain class, such as BO
+    
     input:
     df - targeted df
     classname - str, class name
@@ -291,7 +321,8 @@ def class_select(df, classname):
 
 def first_game(df):
     """
-    only remain the first game played between each pair of players, regardless white or black
+    purpose: only remain the first game played between each pair of players, regardless white or black.
+    It is convenient for game review from the teacher.
     """
     df[['white_result', 'black_result']] = df["Result"].apply(lambda x: pd.Series(str(x).split("-")))
 
@@ -306,7 +337,9 @@ def first_game(df):
 
 def class_pivot(df):
     """
-    Return a pivoted table where row/column representing each player and each cell storing the game result
+    Purpose:
+    Return a pivoted table where row/column representing each player and each cell storing the game result.
+    It will be easier for readers to know the result that is sent in wechat group
     """
     df = df.replace({'1/2': 0.5})
     df['white_result'] = df['white_result'].astype(float)
@@ -339,6 +372,7 @@ def sheet_cred():
 """
 def reorder_col(df):
     """
+    purpose:
     reorder the game result df into something with row and column for player data share the same order
     """
     player_col = df.iloc[:,2:].reindex(df['player'], axis=1)
@@ -352,6 +386,7 @@ def reorder_col(df):
 
 def rp_nan_empty(df):
     """
+    purpose:
     replace null value in the df with "" string so that in google sheet it will turn out to be empty space, rather than 'nan'
     """
     df = df.fillna("")
@@ -360,6 +395,7 @@ def rp_nan_empty(df):
 
 def sum_score(df):
     """
+    purpose:
     create a new column that indicates the sum of score per each player
     """
     df['score'] = df.iloc[:,2:].sum(axis=1)
@@ -367,6 +403,7 @@ def sum_score(df):
     
 def upload_df(name, df, sheet_url):
     """
+    purpose:
     upload df to google sheet RCC_chess_game_result
     each class/csv/file represent one sheet
     
@@ -384,7 +421,9 @@ def upload_df(name, df, sheet_url):
     df = rp_nan_empty(df)
     d2g.upload(df, sheet_url, wks_name, credentials=creds)  
     
+# main function    
 def main():
+    """
     df = game_class()
     df_newname = replace_username(df, "Oinkoinkw","DDisawesome")
     new_df = same_class(df_newname)
@@ -405,7 +444,8 @@ def main():
         upload_df(classname, class_df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
         time.sleep(60)
         #sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
-        
+    """
+    print("The program is in maintainence. Stay tuned!")
 if __name__ == "__main__":
     main()
 
