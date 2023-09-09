@@ -51,12 +51,30 @@ parsed_json = json.loads(json.loads(file_contents))
 print(parsed_json)
 """
 
-
+# student data - will be transferred to database
 students = ['yaohengli',
            'chessloverma',
            'chengliam',
            'emmaxli',
-           'akfunchess66']
+           'akfunchess66',
+           
+           'willhanzhu',
+           'TLPAWN',
+           'Jasminezhao777',
+           'Justinzhao777',
+           'Milkmilkok',
+           'zlicyigloo',
+           'Zora_zhu',
+           'dogwater1012000',
+           
+           'AJLinVH',
+           'charliezienyang',
+           'whatwhywhywhat',
+           'ZhouYuanLi',
+           'Logicalcheetah26',
+           'Nolan330']
+
+students = [x.lower() for x in students]
 
 # to request chess.com API
 user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}
@@ -136,6 +154,57 @@ def get_archive_games(filename):
     """
     games = requests.get(filename,headers = user_agent).json()['games']
     return games
+
+# this is a temp solution to create game notification for Fall 2023
+# will be modulized
+def game_notification():
+    end_times = []
+    white_players = []
+    black_players = []
+    time_controls = []
+
+    for student in students:
+        print(student.upper())
+        archives = get_user_archives(student,2)
+        #print(archives)
+        for archive in archives[::-1]:
+            games = get_archive_games(archive)
+            for game in games[::-1]:
+                #print(game)
+                if (game['white']['username'].lower() == student.lower() and game['black']['username'].lower() in students):
+                    end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    print(end_time)
+                    print("[w]" + student)
+                    print("[b]" + game['black']['username'])
+                    print("time control: " + game['time_control'])
+                    print("          ")
+                    
+                    end_times.append(end_time)
+                    white_players.append(student.lower())
+                    black_players.append(game['black']['username'].lower())
+                    time_controls.append(game['time_control'])
+                    
+                elif (game['black']['username'].lower() == student.lower() and game['white']['username'].lower() in students):
+                    end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    print(end_time)
+                    print("[w]" + game['white']['username'])
+                    print("[b]" + student)
+                    print("time control: " + game['time_control'])
+                    print("          ")
+                    
+                    end_times.append(end_time)
+                    white_players.append(game['white']['username'].lower())
+                    black_players.append(student.lower())
+                    time_controls.append(game['time_control'])
+        print("---------")
+        df = pd.DataFrame()
+        df['end_time'] = end_times
+        df['white_player'] = white_players
+        df['black_player'] = black_players
+        df['time_control'] = time_controls
+        df = df.sort_values(by = 'end_time', ascending = False)
+        df = df.drop_duplicates()
+        return df
 
 def game_result(username,file):    
     """
@@ -454,7 +523,7 @@ def main():
         upload_df(classname, class_df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
         time.sleep(60)
         #sum_result.to_csv("game_result/{}_class_result_{}.csv".format(classname, now))
-    """
+    
     for student in students:
         print(student)
         archives = get_user_archives(student,2)
@@ -463,6 +532,10 @@ def main():
             for game in games[::-1]:
                 print(datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S'))
         print("------")
+    """    
+    df = game_notification()
+    upload_df("2023fall", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+    
 if __name__ == "__main__":
     main()
 
