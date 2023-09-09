@@ -196,15 +196,15 @@ def game_notification():
                     white_players.append(game['white']['username'].lower())
                     black_players.append(student.lower())
                     time_controls.append(game['time_control'])
-        print("---------")
-        df = pd.DataFrame()
-        df['end_time'] = end_times
-        df['white_player'] = white_players
-        df['black_player'] = black_players
-        df['time_control'] = time_controls
-        df = df.sort_values(by = 'end_time', ascending = False)
-        df = df.drop_duplicates()
-        return df
+    print("---------")
+    df = pd.DataFrame()
+    df['end_time'] = end_times
+    df['white_player'] = white_players
+    df['black_player'] = black_players
+    df['time_control'] = time_controls
+    df = df.sort_values(by = 'end_time', ascending = False)
+    df = df.drop_duplicates()
+    return df
 
 def game_result(username,file):    
     """
