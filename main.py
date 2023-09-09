@@ -458,11 +458,11 @@ def main():
     for student in students:
         print(student)
         archives = get_user_archives(student,2)
-            for archive in archives[::-1]:
-                games = get_archive_games(archive)
-                for game in games[::-1]:
-                    print(datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S'))
-    print("------")
+        for archive in archives[::-1]:
+            games = get_archive_games(archive)
+            for game in games[::-1]:
+                print(datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S'))
+        print("------")
 if __name__ == "__main__":
     main()
 
