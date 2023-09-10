@@ -162,7 +162,8 @@ def game_notification():
     white_players = []
     black_players = []
     time_controls = []
-
+    urls = []
+    
     for student in students:
         print(student.upper())
         archives = get_user_archives(student,2)
@@ -183,6 +184,7 @@ def game_notification():
                     white_players.append(student.lower())
                     black_players.append(game['black']['username'].lower())
                     time_controls.append(game['time_control'])
+                    urls.append(game['url'])
                     
                 elif (game['black']['username'].lower() == student.lower() and game['white']['username'].lower() in students):
                     end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
@@ -196,12 +198,14 @@ def game_notification():
                     white_players.append(game['white']['username'].lower())
                     black_players.append(student.lower())
                     time_controls.append(game['time_control'])
+                    urls.append(game['url'])
     print("---------")
     df = pd.DataFrame()
     df['end_time'] = end_times
     df['white_player'] = white_players
     df['black_player'] = black_players
     df['time_control'] = time_controls
+    df['url'] = urls
     df = df.sort_values(by = 'end_time', ascending = False)
     df = df.drop_duplicates()
     return df
