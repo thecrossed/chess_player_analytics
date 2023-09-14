@@ -1,3 +1,5 @@
+import requests
+
 def get_user_archives(username, 
                       nr_months):
     """
