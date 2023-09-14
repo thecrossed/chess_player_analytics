@@ -272,7 +272,6 @@ def upload_df(name, df, sheet_url):
     
 # main function    
 def main(): 
-    api = capi.ChessdotcomAPI()
     collected_data = game_data_collect()
     df = to_pandas_df(collected_data)
     upload_df("2023fall", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
