@@ -16,6 +16,8 @@ from dateutil.relativedelta import relativedelta
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from df2gspread import df2gspread as d2g
+import sys
+sys.path.append("..")
 from lib import chess_dot_com_api
 
 
