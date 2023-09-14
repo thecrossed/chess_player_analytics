@@ -1,7 +1,8 @@
 import requests
 
 def get_user_archives(username, 
-                      nr_months):
+                      nr_months,
+                     user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
     """
     purpose:
     get archive monthly files of specific chess.com player
@@ -16,7 +17,7 @@ def get_user_archives(username,
     target_month - files of archives according to months parameter
     """
     url = "https://api.chess.com/pub/player/{username}/games/archives".format(username = username)
-    archive_request = requests.get(url, headers = self.user_agent)
+    archive_request = requests.get(url, headers = user_agent)
     archives = archive_request.json()['archives']
     past_months = last_n_month(nr_months)
     target_month = []
@@ -25,7 +26,8 @@ def get_user_archives(username,
             target_month.append(archive)
     return target_month
     
-def get_archive_games(filename):
+def get_archive_games(filename,
+                     user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
     """
     purpose:
     
@@ -36,5 +38,5 @@ def get_archive_games(filename):
     
     output: 
     """
-    games = requests.get(filename,headers = self.user_agent).json()['games']
+    games = requests.get(filename,headers = user_agent).json()['games']
     return games
