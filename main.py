@@ -50,9 +50,11 @@ parsed_json = json.loads(json.loads(file_contents))
 
 print(parsed_json)
 """
+# to request chess.com API
+user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}
 
 # student data - will be transferred to database
-students = ['yaohengli',
+students_username = ['yaohengli',
            'chessloverma',
            'chengliam',
            'emmaxli',
@@ -75,10 +77,18 @@ students = ['yaohengli',
            'Nolan330',
            'antleo0314']
 
-students = [x.lower() for x in students]
-
-# to request chess.com API
-user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}
+def lowercase_student(student_list):
+    """
+    to lowercase all the username
+    
+    input - list, list of student username, regardless upper or lower case
+    
+    output - list, list of student username, lower case
+    """
+    
+    lower_students = [x.lower() for x in student_list]
+    
+    return lower_students
 
 
 def student_df(student_data):
@@ -164,7 +174,7 @@ def game_notification():
     black_players = []
     time_controls = []
     urls = []
-    
+    students = lowercase_student(students_username)
     for student in students:
         print(student.upper())
         archives = get_user_archives(student,2)
@@ -211,7 +221,15 @@ def game_notification():
     df = df.drop_duplicates()
     return df
 
-    
+def rp_nan_empty(df):
+    """
+    purpose:
+    replace null value in the df with "" string so that in google sheet it will turn out to be empty space, rather than 'nan'
+    """
+    df = df.fillna("")
+
+    return df
+
 def upload_df(name, df, sheet_url):
     """
     purpose:
