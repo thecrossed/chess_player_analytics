@@ -154,7 +154,8 @@ def get_user_archives(username,
 
 # NOTE: the current chessdotcom package is not working
 # please check the chess_analytics_test_notebook for the new solution (ongoing)
-def get_archive_games(filename):
+def get_archive_games(filename, 
+                      user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
     """
     purpose:
     
