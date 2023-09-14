@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repo aims at automating the analytics work of the rcc chess club.
+This repo aims at automating the analytics work of the RCC chess club.
 
 ## Description
 
@@ -14,9 +14,9 @@ It stores the schedule and workflow of github actions. One can adjust the time f
 
 It stores the status of the chess_game_result.ipynb file
 
-3. chess_game_result.ipynb
+3. test notebooks
 
-It is used to test our code before implementing into main.py
+It is used to store ipynb for testing purpose
 
 4. main.py
 
@@ -30,28 +30,32 @@ It stores the python package that need to be installed
 
 Log the message when the workflow runs.
 
+7. output data
+
+Storing output data
+
+8. chess_dot_com_api.py
+
+Module dealing with chess.com api
+
+9. googlesheet.py
+
+Module dealing with google sheet
+
+10. stuudents.py
+
+Module dealing with student data
+
+11. games.py
+
+Module dealing with game data
+
+
+
 ## Project
-1. Generate game results for BO, BP and AN 2023 spring classes
+1. Generate game results for BO, BP and talented 2023 fall classes
 
-RCC club have weekly round-robin chess games for each class. Currently, teaching assistants need to visit the profile page of chess.com of each player to record the game result into a google spreadsheet per class. This project aims to automate the work by calling chess.com API to get the games data and log it into a csv file which teaching assistants can download from this repo and upload to the google spreadsheet.
-
-Main steps -
-
-a. Get a collection of student username and the class they are in (json format)
-
-b. Calling the chess.com API for each student for their game archives of the past three months
-
-c. Extracting the username, game_starttime, game_endtime, white_username, black_username, Result from data in step b.
-
-d. Filtering out the games that don't have both players are in the same class
-
-e. calculate how many seconds of each game (TA might need this info to exclude games that don't count)
-
-g. push the change into the repo
-
-h. Automately run the job every day
-
-i. Sending game and result dataframe to [RCC_tianmin_students_games](https://docs.google.com/spreadsheets/d/1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o/edit#gid=1280403112) and [RCC_chess_game_result](https://docs.google.com/spreadsheets/d/12R6hwzKys_DQE6vFpuOLGpe68hGHktSzd65AkR0nOsA/edit#gid=976340202)
+RCC club have weekly round-robin chess games for each class. Currently, teaching assistants need to visit the profile page of chess.com of each player to record the game result into a google spreadsheet. This project aims to automate the work by calling chess.com API to get the games data and log it into a csv file which teaching assistants can download from this repo and upload to the google spreadsheet. Sending game and result dataframe to [RCC_tianmin_students_games](https://docs.google.com/spreadsheets/d/1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o/edit#gid=1280403112) 
 
 ## Contact person
 
