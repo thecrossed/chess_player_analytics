@@ -17,7 +17,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from df2gspread import df2gspread as d2g
 import sys
-import chess_dot_com_api as capi
+import chess_dot_com_api.ChessdotcomAPI as capi
 
 
 """
