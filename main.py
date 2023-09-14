@@ -166,9 +166,15 @@ def get_archive_games(filename):
     games = requests.get(filename,headers = user_agent).json()['games']
     return games
 
-# this is a temp solution to create game notification for Fall 2023
-# will be modulized
-def game_notification():
+def game_data_collect():
+    """
+    collect game data for each student from the json raw data -
+    end_times
+    white_players
+    black_players
+    time_controls
+    urls
+    """
     end_times = []
     white_players = []
     black_players = []
@@ -211,14 +217,23 @@ def game_notification():
                     time_controls.append(game['time_control'])
                     urls.append(game['url'])
     print("---------")
+    return end_times, white_players, black_players, time_controls, urls
+
+def to_pandas_df(fetched_data):
+    """
+    Import fetched game data into a pandas dataframe
+    
+    and then sort and drop duplicates
+    """
     df = pd.DataFrame()
-    df['end_time'] = end_times
-    df['white_player'] = white_players
-    df['black_player'] = black_players
-    df['time_control'] = time_controls
-    df['url'] = urls
+    df['end_time'] = fetched_data[0]
+    df['white_player'] = fetched_data[1]
+    df['black_player'] = fetched_data[2]
+    df['time_control'] = fetched_data[3]
+    df['url'] = fetched_data[4]
     df = df.sort_values(by = 'end_time', ascending = False)
     df = df.drop_duplicates()
+    
     return df
 
 def rp_nan_empty(df):
@@ -252,7 +267,8 @@ def upload_df(name, df, sheet_url):
     
 # main function    
 def main(): 
-    df = game_notification()
+    collected_data = game_data_collect()
+    df = to_pandas_df(collected_data)
     upload_df("2023fall", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
     
 if __name__ == "__main__":
