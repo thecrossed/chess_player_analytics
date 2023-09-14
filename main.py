@@ -140,7 +140,7 @@ def get_user_archives(username, nr_months):
     target_month - files of archives according to months parameter
     """
     url = "https://api.chess.com/pub/player/{username}/games/archives".format(username = username)
-    user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}
+    user_agent = user_agent
     archive_request = requests.get(url, headers = user_agent)
     archives = archive_request.json()['archives']
     past_months = last_n_month(nr_months)
