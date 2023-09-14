@@ -1,5 +1,4 @@
-def get_user_archives(self,
-                      username, 
+def get_user_archives(username, 
                       nr_months):
     """
     purpose:
@@ -24,8 +23,7 @@ def get_user_archives(self,
             target_month.append(archive)
     return target_month
     
-def get_archive_games(self,
-                      filename):
+def get_archive_games(filename):
     """
     purpose:
     
