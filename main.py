@@ -127,11 +127,11 @@ def last_n_month(n):
         else:
             months_lst.append(str(months.year) + "/"+ str(months.month))
     return months_lst
-
+"""
 def get_user_archives(username, 
                       nr_months,
                       user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
-    """
+    
     purpose:
     get archive monthly files of specific chess.com player
     
@@ -143,7 +143,7 @@ def get_user_archives(username,
     
     output:
     target_month - files of archives according to months parameter
-    """
+    
     url = "https://api.chess.com/pub/player/{username}/games/archives".format(username = username)
     archive_request = requests.get(url, headers = user_agent)
     archives = archive_request.json()['archives']
@@ -158,7 +158,7 @@ def get_user_archives(username,
 # please check the chess_analytics_test_notebook for the new solution (ongoing)
 def get_archive_games(filename, 
                       user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
-    """
+    
     purpose:
     
     return games in one archive file
@@ -167,10 +167,10 @@ def get_archive_games(filename,
     filename - filename that contains game urls
     
     output: 
-    """
+    
     games = requests.get(filename,headers = user_agent).json()['games']
     return games
-
+"""
 def game_data_collect():
     """
     collect game data for each student from the json raw data -
@@ -188,10 +188,10 @@ def game_data_collect():
     students = lowercase_student(students_username)
     for student in students:
         print(student.upper())
-        archives = get_user_archives(student,2)
+        archives = capi.get_user_archives(student,2)
         #print(archives)
         for archive in archives[::-1]:
-            games = get_archive_games(archive)
+            games = capi.get_archive_games(archive)
             for game in games[::-1]:
                 #print(game)
                 if (game['white']['username'].lower() == student.lower() and game['black']['username'].lower() in students):
