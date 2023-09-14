@@ -50,8 +50,7 @@ parsed_json = json.loads(json.loads(file_contents))
 
 print(parsed_json)
 """
-# to request chess.com API
-user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}
+
 
 # student data - will be transferred to database
 students_username = ['yaohengli',
@@ -127,7 +126,9 @@ def last_n_month(n):
             months_lst.append(str(months.year) + "/"+ str(months.month))
     return months_lst
 
-def get_user_archives(username, nr_months):
+def get_user_archives(username, 
+                      nr_months,
+                      user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
     """
     purpose:
     get archive monthly files of specific chess.com player
@@ -135,12 +136,13 @@ def get_user_archives(username, nr_months):
     input:
     username - username of the chess.com player
     nr_months - integer, nummber of past months that we want to get the archives
+    # to request chess.com API
+       user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}
     
     output:
     target_month - files of archives according to months parameter
     """
     url = "https://api.chess.com/pub/player/{username}/games/archives".format(username = username)
-    user_agent = user_agent
     archive_request = requests.get(url, headers = user_agent)
     archives = archive_request.json()['archives']
     past_months = last_n_month(nr_months)
