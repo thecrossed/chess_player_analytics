@@ -1,5 +1,5 @@
 class ChessdotcomAPI():
-    def __init__(self, user_agent):
+    def __init__(self, user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
         self.user_agent = user_agent
     
     
