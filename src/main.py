@@ -21,26 +21,6 @@ import chess_dot_com_api as capi
 import googlesheet as g
 import data
 
-
-
-
-"""
-def student_df(student_data):
-    
-    purpose:
-    transform student_data dictionary data into a pandas dataframe
-    
-    input:
-    student_data - dictionary, where key is the class and value is a list of username of each student
-    
-    output:
-    a dataframe having two columns - class, student class; username, student username
-    
-    df = pd.DataFrame({'Keys': list(student_data.keys()), 'Values': list(student_data.values())})
-    df = df.explode(column='Values').reset_index(drop=True)
-    df.rename(columns = {'Keys':'class', 'Values':'username'}, inplace = True)
-    return df
-"""
     
 # main function    
 def main(): 
