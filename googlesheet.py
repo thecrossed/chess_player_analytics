@@ -44,6 +44,8 @@ def upload_df(name, df, sheet_url):
          "https://www.googleapis.com/auth/spreadsheets",
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/drive"]
+    # info about credential 
+    # https://developers.google.com/workspace/guides/create-credentials
     creds = ServiceAccountCredentials.from_json_keyfile_name("./creds.json", scope)
     wks_name = name
     df = rp_nan_empty(df)
