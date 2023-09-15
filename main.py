@@ -23,29 +23,6 @@ import data
 
 
 
-# student data - will be transferred to database
-students_username = ['yaohengli',
-           'chessloverma',
-           'chengliam',
-           'emmaxli',
-           'akfunchess66',
-           
-           'willhanzhu',
-           'TLPAWN',
-           'Jasminezhao777',
-           'Justinzhao777',
-           'Milkmilkok',
-           'zlicyigloo',
-           'Zora_zhu',
-           'dogwater1012000',
-           
-           'AJLinVH',
-           'charliezienyang',
-           'whatwhywhywhat',
-           'ZhouYuanLi',
-           'Logicalcheetah26',
-           'Nolan330',
-           'antleo0314']
 
 """
 def student_df(student_data):
