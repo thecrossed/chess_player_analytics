@@ -49,7 +49,7 @@ students_username = ['yaohengli',
 
 """
 def student_df(student_data):
-    """
+    
     purpose:
     transform student_data dictionary data into a pandas dataframe
     
@@ -58,7 +58,7 @@ def student_df(student_data):
     
     output:
     a dataframe having two columns - class, student class; username, student username
-    """
+    
     df = pd.DataFrame({'Keys': list(student_data.keys()), 'Values': list(student_data.values())})
     df = df.explode(column='Values').reset_index(drop=True)
     df.rename(columns = {'Keys':'class', 'Values':'username'}, inplace = True)
