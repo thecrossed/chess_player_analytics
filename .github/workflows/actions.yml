@@ -44,7 +44,7 @@ jobs:
       - name: execute py script # run main.py
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
-        run: python main.py
+        run: python ./src/main.py
         
       - name: remove student json key file
         run: 'rm ./students.json'
