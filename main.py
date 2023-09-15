@@ -18,6 +18,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from df2gspread import df2gspread as d2g
 import sys
 import chess_dot_com_api as capi
+import googlesheet as g
 
 
 """
@@ -211,8 +212,8 @@ def upload_df(name, df, sheet_url):
 # main function    
 def main(): 
     collected_data = game_data_collect()
-    df = to_pandas_df(collected_data)
-    upload_df("2023fall", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+    df = g.to_pandas_df(collected_data)
+    g.upload_df("2023fall", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
     
 if __name__ == "__main__":
     main()
