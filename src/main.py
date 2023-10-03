@@ -27,8 +27,13 @@ from pgn_parser import pgn, parser
 def main(): 
     collected_data = data.game_data_collect()
     df = g.to_pandas_df(collected_data)
-    print("data is converted into pandas")
-    g.upload_df("2023fall", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+    print("game is converted into pandas")
+    g.upload_df("2023fall_game", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+
+    collected_move = data.move_data_collect()
+    df_move = g.to_pandas_move(collected_move)
+    print("move is converted into pandas")
+    g.upload_df("2023fall_move", df_move, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
     
 if __name__ == "__main__":
     main()
