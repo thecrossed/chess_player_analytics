@@ -15,6 +15,10 @@ def to_pandas_df(fetched_data):
     df['time_control'] = fetched_data[3]
     df['url'] = fetched_data[4]
     df['result'] = fetched_data[5]
+    df['white_rating'] = fetched_data[6]
+    df['black_rating'] = fetched_data[7]
+    df['white_accuracy'] = fetched_data[8]
+    df['black_accuracy'] = fetched_data[9]
     df = df.sort_values(by = 'end_time', ascending = False)
     df = df.drop_duplicates()
     
