@@ -20,6 +20,7 @@ import sys
 import chess_dot_com_api as capi
 import googlesheet as g
 import data
+from pgn_parser import pgn, parser
 
     
 # main function    
