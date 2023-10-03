@@ -90,8 +90,8 @@ def game_data_collect():
                     white_rating.append(game['white']['rating'])
                     black_rating.append(game['black']['rating'])
                     try:
-                        white_accuracy.append(game['white']['accuracy'])
-                        black_accuracy.append(game['black']['accuracy'])
+                        white_accuracy.append(game['accuracies']['white'])
+                        black_accuracy.append(game['accuracies']['black'])
                     except:
                         white_accuracy.append('unknown')
                         black_accuracy.append('unknown')
@@ -114,8 +114,8 @@ def game_data_collect():
                     white_rating.append(game['white']['rating'])
                     black_rating.append(game['black']['rating'])
                     try:
-                        white_accuracy.append(game['white']['accuracy'])
-                        black_accuracy.append(game['black']['accuracy'])
+                        white_accuracy.append(game['accuracies']['white'])
+                        black_accuracy.append(game['accuracies']['black'])
                     except:
                         white_accuracy.append('unknown')
                         black_accuracy.append('unknown')
