@@ -57,13 +57,14 @@ def game_data_collect():
     black_players = []
     time_controls = []
     urls = []
+    results = []
     students = lowercase_student(students_username)
     for student in students:
         print(student.upper())
-        archives = capi.get_user_archives(student,2)
+        archives = get_user_archives(student,2)
         #print(archives)
         for archive in archives[::-1]:
-            games = capi.get_archive_games(archive)
+            games = get_archive_games(archive)
             for game in games[::-1]:
                 #print(game)
                 if (game['white']['username'].lower() == student.lower() and game['black']['username'].lower() in students):
@@ -72,6 +73,7 @@ def game_data_collect():
                     print("[w]" + student)
                     print("[b]" + game['black']['username'])
                     print("time control: " + game['time_control'])
+                    print(game['pgn'].split("\n")[-2].split(" ")[-1]) # result
                     print("          ")
                     
                     end_times.append(end_time)
@@ -79,6 +81,7 @@ def game_data_collect():
                     black_players.append(game['black']['username'].lower())
                     time_controls.append(game['time_control'])
                     urls.append(game['url'])
+                    results.append(game['pgn'].split("\n"))
                     
                 elif (game['black']['username'].lower() == student.lower() and game['white']['username'].lower() in students):
                     end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
@@ -86,6 +89,7 @@ def game_data_collect():
                     print("[w]" + game['white']['username'])
                     print("[b]" + student)
                     print("time control: " + game['time_control'])
+                    print(game['pgn'].split("\n")[-2].split(" ")[-1])
                     print("          ")
                     
                     end_times.append(end_time)
@@ -93,5 +97,7 @@ def game_data_collect():
                     black_players.append(student.lower())
                     time_controls.append(game['time_control'])
                     urls.append(game['url'])
+                    results.append(game['pgn'].split("\n")[-2].split(" ")[-1])
+
     print("---------")
-    return end_times, white_players, black_players, time_controls, urls
+    return end_times, white_players, black_players, time_controls, urls, results
