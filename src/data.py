@@ -89,8 +89,8 @@ def game_data_collect():
                     results.append(game['pgn'].split("\n")[-2].split(" ")[-1])
                     white_rating.append(game['white']['rating'])
                     black_rating.append(game['black']['rating'])
-                    white_accuracy.append(game['white']['accuracy'])
-                    black_accuracy.append(game['black']['accuracy'])
+                    white_accuracy.append(game['accuracies']['white'])
+                    black_accuracy.append(game['accuracies']['black'])
                     
                 elif (game['black']['username'].lower() == student.lower() and game['white']['username'].lower() in students):
                     end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
@@ -109,8 +109,8 @@ def game_data_collect():
                     results.append(game['pgn'].split("\n")[-2].split(" ")[-1])
                     white_rating.append(game['white']['rating'])
                     black_rating.append(game['black']['rating'])
-                    white_accuracy.append(game['white']['accuracy'])
-                    black_accuracy.append(game['black']['accuracy'])
+                    white_accuracy.append(game['accuracies']['white'])
+                    black_accuracy.append(game['accuracies']['black'])
 
     print("---------")
     return end_times, white_players, black_players, time_controls, urls, results, white_rating, black_rating, white_accuracy, black_accuracy
