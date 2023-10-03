@@ -12,3 +12,4 @@ gspread
 oauth2client
 df2gspread
 mysql-connector
+pgn_parser
