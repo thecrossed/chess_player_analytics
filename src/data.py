@@ -122,3 +122,75 @@ def game_data_collect():
 
     print("---------")
     return end_times, white_players, black_players, time_controls, urls, results, white_rating, black_rating, white_accuracy, black_accuracy
+
+def move_data_collect():
+    """
+    collect move data for each game from the json raw data -
+
+    """
+    end_times = []
+    urls = []
+    move_num = []
+    move = []
+    clk = []
+    
+    students = lowercase_student(students_username)
+    for student in students:
+        print(student.upper())
+        archives = get_user_archives(student,2)
+        #print(archives)
+        for archive in archives[::-1]:
+            games = get_archive_games(archive)
+            for game in games[::-1]:
+                #print(game)
+                if (game['white']['username'].lower() == student.lower() and game['black']['username'].lower() in students):
+                    url = game['url']
+                    end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    moves = parser.parse(game['pgn'] , actions=pgn.Actions())
+                    move_text = moves.movetext
+                    for i in range(len(move_text) - 1):
+                        if i % 2 == 0:
+                            
+                            move_num.append( int(i / 2) + 1 )
+                            move.append(str(move_text[i]).split("{")[0].split(".")[-1])
+                            clk.append(str(move_text[i]).split("%clk ")[-1].split("]}")[0])
+                            urls.append(url)
+                            end_times.append(end_time)
+                        else:
+                            move_num.append( int(i / 2) + 1 )
+                            move.append(str(move_text[i]).split("{")[0].split("...")[-1])
+                            clk.append(str(move_text[i]).split("%clk ")[-1].split("]}")[0])
+                            urls.append(url)
+                            end_times.append(end_time)
+
+                            
+
+
+                    
+                elif (game['black']['username'].lower() == student.lower() and game['white']['username'].lower() in students):
+                    url = game['url']
+                    end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    moves = parser.parse(game['pgn'] , actions=pgn.Actions())
+                    move_text = moves.movetext
+                    for i in range(len(move_text) - 1):
+                        if i % 2 == 0:
+                            
+                            move_num.append( int(i / 2) + 1 )
+                            move.append(str(move_text[i]).split("{")[0].split(".")[-1])
+                            clk.append(str(move_text[i]).split("%clk ")[-1].split("]}")[0])
+                            urls.append(url)
+                            end_times.append(end_time)
+                        else:
+                            move_num.append( int(i / 2) + 1 )
+                            move.append(str(move_text[i]).split("{")[0].split("...")[-1])
+                            clk.append(str(move_text[i]).split("%clk ")[-1].split("]}")[0])
+                            urls.append(url)
+                            end_times.append(end_time)
+
+
+
+
+
+
+    print("---------")
+    return move_num, move, clk, urls, end_times
