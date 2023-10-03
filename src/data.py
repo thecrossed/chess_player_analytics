@@ -137,10 +137,10 @@ def move_data_collect():
     students = lowercase_student(students_username)
     for student in students:
         print(student.upper())
-        archives = get_user_archives(student,2)
+        archives = capi.get_user_archives(student,2)
         #print(archives)
         for archive in archives[::-1]:
-            games = get_archive_games(archive)
+            games = capi.get_archive_games(archive)
             for game in games[::-1]:
                 #print(game)
                 if (game['white']['username'].lower() == student.lower() and game['black']['username'].lower() in students):
