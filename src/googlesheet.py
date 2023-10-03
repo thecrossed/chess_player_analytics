@@ -14,6 +14,7 @@ def to_pandas_df(fetched_data):
     df['black_player'] = fetched_data[2]
     df['time_control'] = fetched_data[3]
     df['url'] = fetched_data[4]
+    df['result'] = fetched_data[5]
     df = df.sort_values(by = 'end_time', ascending = False)
     df = df.drop_duplicates()
     
