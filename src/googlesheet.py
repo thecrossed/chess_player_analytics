@@ -24,6 +24,25 @@ def to_pandas_df(fetched_data):
     
     return df
 
+def to_pandas_move(fetched_data):
+    """
+    Import fetched game data into a pandas dataframe
+    
+    and then sort and drop duplicates
+    """
+    df = pd.DataFrame()
+    df['move_num'] = fetched_data[0]
+    df['move'] = fetched_data[1]
+    df['clk'] = fetched_data[2]
+    df['urls'] = fetched_data[3]
+    df['end_time'] = fetched_data[4]
+    df = df.astype('str')
+    df['move_num'] = df['move_num'].astype('int')
+    df = df.drop_duplicates()
+    df = df.sort_values(by = ['end_time','move_num'], ascending = [False,True])
+    
+    return df
+
 def rp_nan_empty(df):
     """
     purpose:
