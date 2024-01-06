@@ -16,19 +16,16 @@ students_username = ['yaohengli',
            'TLPAWN',
            'Jasminezhao777',
            'Justinzhao777',
-           'Milkmilkok',
-           'zlicyigloo',
-           'Zora_zhu',
            'dogwater1012000',
+           'markhushen',
            
-           'AJLinVH',
            'charliezienyang',
            'whatwhywhywhat',
            'ZhouYuanLi',
-           'Logicalcheetah26',
-           'Nolan330',
            'antleo0314',
-           'AntLeoChess']
+           'AntLeoChess',
+           'carolinema77',
+           'jjjjluo']
 
 def lowercase_student(student_list):
     """
